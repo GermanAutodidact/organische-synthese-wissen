@@ -3,6 +3,23 @@
 > **Status:** Abgeschlossen (Phase 2–4 verifiziert: alle **291 / 291** Quellen & Kapitel vollständig und verlustfrei übertragen `[x]`, `0` offene Einträge).
 > **Grundregel:** Kein Verlust von chemischen Details, Reaktionsbedingungen (Temperatur, Zeit, Lösungsmittel, Äquivalente), Mechanismen, funktionellen Gruppen-Toleranzen, Aufarbeitungs-Kaskaden oder Sicherheitswarnungen.
 
+<!-- TOC_START -->
+## Inhaltsverzeichnis & Zeilen-Index
+
+| Abschnitt | Ebene | Zeilen |
+| :--- | :--- | :---: |
+| [Übersicht der Zieldateien in `skill_datenbank/`](#sec-1) | Hauptabschnitt | Z. 23–31 |
+| [1. Quelle: `raw_sources/codex-organic-chem`](#sec-2) | Hauptabschnitt | Z. 33–82 |
+| [2. Quelle: `raw_sources/scientific-agents`](#sec-3) | Hauptabschnitt | Z. 84–165 |
+| [3. Quelle: `raw_sources/scientific-agent-skills`](#sec-4) | Hauptabschnitt | Z. 167–294 |
+| [4. Quellen: `raw_sources/rxno` & `raw_sources/ReactionClassifier`](#sec-5) | Hauptabschnitt | Z. 296–317 |
+| [5. Quelle: `raw_sources/libretexts_lab_techniques` (Lisa Nichols: *Organic Chemistry Lab Techniques*)](#sec-6) | Hauptabschnitt | Z. 319–645 |
+
+---
+
+<!-- TOC_END -->
+
+<a id="sec-1"></a>
 ## Übersicht der Zieldateien in `skill_datenbank/`
 - **Zieldatei 1:** `SKILL.md` (Das Haupt-Regelwerk für die KI: Anti-Halluzinations-/Valenz-Gesetz, First-Principles- & Mechanismus-Pflicht, Physikalische & Chemische Prozesssicherheit, Labor-Logik vor Papier-Chemie)
 - **Zieldatei 2:** `01_Reaktionsmechanismen_Reagenzien_und_Selektivitaet.md` (Mechanismus-Entscheidungsmatrizen, Reagenzien- & Bedingungen-Tabellen, Schutzgruppen-Strategie & Orthogonalität, pKs- & Lösungsmittel-Referenz)
@@ -12,6 +29,7 @@
 
 ---
 
+<a id="sec-2"></a>
 ## 1. Quelle: `raw_sources/codex-organic-chem`
 Fokus: Struktur-Validierungsregeln, Valenz-/Sanitization-Checks, Massen-/Ladungsbilanz (inkl. impliziter H-Atome), Mechanismus-Spezifikation (MechanismSpec 2.1), Elektronenschub-Buchhaltung, Mechanismus-Familien, Semiempirik (GFN2-xTB / Fukui-Indizes / CREST) und Anti-Halluzinations-Gesetze.
 
@@ -62,6 +80,7 @@ Fokus: Struktur-Validierungsregeln, Valenz-/Sanitization-Checks, Massen-/Ladungs
 
 ---
 
+<a id="sec-3"></a>
 ## 2. Quelle: `raw_sources/scientific-agents`
 Fokus: Chemie-, Synthese-, Prozess-, Katalyse-, Naturstoff-, Organometall-, Analytik- und Spektroskopie-bezogene `AGENTS.md`- und `SKILL.md`-Dateien inkl. Mindset, First Principles, Red Herrings / Common Pitfalls, Troubleshooting Playbooks und Sicherheitsregeln.
 
@@ -144,6 +163,7 @@ Fokus: Chemie-, Synthese-, Prozess-, Katalyse-, Naturstoff-, Organometall-, Anal
 
 ---
 
+<a id="sec-4"></a>
 ## 3. Quelle: `raw_sources/scientific-agent-skills`
 Fokus: Chemie-, Reaktions-, RDKit-, Retrosynthese-, Modellierungs- und Spektroskopie-bezogene `SKILL.md`- und Referenzdateien inkl. `Common Pitfalls` und Validierungsregeln.
 
@@ -272,6 +292,7 @@ Fokus: Chemie-, Reaktions-, RDKit-, Retrosynthese-, Modellierungs- und Spektrosk
 
 ---
 
+<a id="sec-5"></a>
 ## 4. Quellen: `raw_sources/rxno` & `raw_sources/ReactionClassifier`
 Fokus: Systematische Auswertung aller Namensreaktionen, Reaktionsklassen, Ontologie-Hierarchien (RXNO & MOP) und SMARTS/SMIRKS-Transformationsmuster.
 
@@ -294,6 +315,7 @@ Fokus: Systematische Auswertung aller Namensreaktionen, Reaktionsklassen, Ontolo
 
 ---
 
+<a id="sec-6"></a>
 ## 5. Quelle: `raw_sources/libretexts_lab_techniques` (Lisa Nichols: *Organic Chemistry Lab Techniques*)
 Fokus: Vollständige praktische Labortechnik (162 heruntergeladene Fachkapitel zu Apparaturaufbau, Heizen/Kühlen, Filtration, DC/Säulen-/Gaschromatographie, Umkristallisation, Flüssig-Flüssig- & Säure-Base-Extraktion, Reaktions-Workup, Trocknungsmittel, einfache/fraktionierte/Vakuum-/Wasserdampfdestillation, Rotationsverdampfer, Schmelzpunkt, Siedepunkt, Sublimation und nasschemische Nachweistests).
 

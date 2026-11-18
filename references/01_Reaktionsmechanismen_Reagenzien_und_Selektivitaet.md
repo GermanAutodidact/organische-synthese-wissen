@@ -4,8 +4,38 @@ Dieses Modul vereint die vollständige mechanistische und reagenzienspezifische 
 
 ---
 
+<!-- TOC_START -->
+## Inhaltsverzeichnis & Zeilen-Index
+
+| Abschnitt | Ebene | Zeilen |
+| :--- | :--- | :---: |
+| [1. MECHANISMUS-ENTSCHEIDUNGSMATRIZEN & ELEMENTARSCHRITT-LOGIK](#sec-1) | Hauptabschnitt | Z. 36–37 |
+| ↳ [1.1 Konkurrenz von $S_\text{N}1$ vs. $S_\text{N}2$ vs. $E1$ vs. $E2$ an $sp^3$-Zentren](#sec-2) | Unterabschnitt | Z. 39–80 |
+| ↳ [1.2 Elektrophile Additionen an Alkene und Alkine ($\text{Ad}_\text{E}$)](#sec-3) | Unterabschnitt | Z. 82–101 |
+| ↳ [1.3 Aromatische Substitutionen: $S_\text{E}\text{Ar}$, $S_\text{N}\text{Ar}$, Arin-Mechanismus und Dirigierende Effekte](#sec-4) | Unterabschnitt | Z. 103–138 |
+| ↳ [1.4 Carbonylchemie: Reaktivitätsleiter, Addition-Eliminierung & Enolat-Selektivität](#sec-5) | Unterabschnitt | Z. 140–172 |
+| ↳ [1.5 Pericyclische Reaktionen und Umlagerungen](#sec-6) | Unterabschnitt | Z. 174–201 |
+| [2. Reagenzien- & Bedingungen-Tabellen (Oxidationen, Reduktionen, C-C-Knüpfungen)](#sec-7) | Hauptabschnitt | Z. 203–204 |
+| ↳ [2.1 Oxidationen: Vollständige Reagenzien-Matrix, Bedingungen & Selektivität](#sec-8) | Unterabschnitt | Z. 206–241 |
+| ↳ [2.2 Reduktionen: Vollständige Reagenzien- & Chemoselektivitäts-Matrix](#sec-9) | Unterabschnitt | Z. 243–337 |
+| ↳ [2.3 C-C-Knüpfungen: Organometall-Reagenzien, Olefinierungen & Kreuzkupplungen](#sec-10) | Unterabschnitt | Z. 339–403 |
+| [3. Schutzgruppen-Strategie & Orthogonalität (Systematik nach Greene & Wuts)](#sec-11) | Hauptabschnitt | Z. 405–408 |
+| ↳ [3.1 Alkohol-Schutzgruppen ($\text{R-OH}$) & 1,2-/1,3-Diol-Schutzgruppen](#sec-12) | Unterabschnitt | Z. 410–448 |
+| ↳ [3.2 Amin-Schutzgruppen ($\text{R-NH}_2$ / $\text{R}_2\text{NH}$)](#sec-13) | Unterabschnitt | Z. 450–462 |
+| ↳ [3.3 Carbonyl- & Carbonsäure-Schutzgruppen sowie Terminale Alkine](#sec-14) | Unterabschnitt | Z. 464–476 |
+| ↳ [3.4 Master-Entscheidungsmatrix der Orthogonalen Entschützung](#sec-15) | Unterabschnitt | Z. 478–495 |
+| [4. $\text{p}K_\text{S}$- & Lösungsmittel-Referenz für Synthese und Aufarbeitung](#sec-16) | Hauptabschnitt | Z. 497–498 |
+| ↳ [4.1 Vollständige $\text{p}K_\text{S}$-Referenzskala ($\text{H}_2\text{O}$ und $\text{DMSO}$) & Deprotonierungs-Thermodynamik](#sec-17) | Unterabschnitt | Z. 500–551 |
+| ↳ [4.2 Vollständige Labor-Lösungsmittel-Referenz (Physikalische Daten, Wassergehalt, Azeotrope & Trocknung)](#sec-18) | Unterabschnitt | Z. 553–588 |
+
+---
+
+<!-- TOC_END -->
+
+<a id="sec-1"></a>
 ## 1. MECHANISMUS-ENTSCHEIDUNGSMATRIZEN & ELEMENTARSCHRITT-LOGIK
 
+<a id="sec-2"></a>
 ### 1.1 Konkurrenz von $S_\text{N}1$ vs. $S_\text{N}2$ vs. $E1$ vs. $E2$ an $sp^3$-Zentren
 
 Bei jeder Reaktion eines gesättigten Alkylsubstrats $\text{R-X}$ (`[CX4][F,Cl,Br,I,OS(=O)(=O)*]`) mit einem Nukleophil/einer Base entscheidet das Zusammenspiel aus **Substratstruktur, Basizität vs. Nukleophilie, sterischer Hinderung, Abgangsgruppenqualität, Lösungsmittel und Temperatur** über den Hauptpfad.
@@ -48,6 +78,7 @@ Bei jeder Reaktion eines gesättigten Alkylsubstrats $\text{R-X}$ (`[CX4][F,Cl,B
 
 ---
 
+<a id="sec-3"></a>
 ### 1.2 Elektrophile Additionen an Alkene und Alkine ($\text{Ad}_\text{E}$)
 
 Das $\pi$-System eines Alkens (`C=C`, HOMO) oder Alkins (`C#C`) reagiert als weiches C-Nukleophil mit Elektrophilen. Die Stereochemie und Regiochemie hängen strikt vom Mechanismus der Zwischenstufe ab:
@@ -68,6 +99,7 @@ Das $\pi$-System eines Alkens (`C=C`, HOMO) oder Alkins (`C#C`) reagiert als wei
 
 ---
 
+<a id="sec-4"></a>
 ### 1.3 Aromatische Substitutionen: $S_\text{E}\text{Ar}$, $S_\text{N}\text{Ar}$, Arin-Mechanismus und Dirigierende Effekte
 
 #### A. Elektrophile Aromatische Substitution ($S_\text{E}\text{Ar}$ / Wheland-Komplex)
@@ -104,6 +136,7 @@ Aus `codex-organic-chem/src/codex_organic_chem/mechanism.py` (`possible_electrop
 
 ---
 
+<a id="sec-5"></a>
 ### 1.4 Carbonylchemie: Reaktivitätsleiter, Addition-Eliminierung & Enolat-Selektivität
 
 #### A. Die Elektrophilie-Leiter der Carbonyl- und Carbonsäurederivate
@@ -137,6 +170,7 @@ Bei unsymmetrischen Ketonen (z. B. 2-Methylcyclohexanon) entscheidet die Reaktio
 
 ---
 
+<a id="sec-6"></a>
 ### 1.5 Pericyclische Reaktionen und Umlagerungen
 
 1. **Cycloadditionen (Woodward-Hoffmann-Regeln: thermisch $[4n+2]\pi$ suprafacial erlaubt, $[4n]\pi$ nur photochemisch oder antarafacial wie bei Ketenen):**
@@ -165,8 +199,10 @@ Bei unsymmetrischen Ketonen (z. B. 2-Methylcyclohexanon) entscheidet die Reaktio
 
 ---
 
+<a id="sec-7"></a>
 ## 2. Reagenzien- & Bedingungen-Tabellen (Oxidationen, Reduktionen, C-C-Knüpfungen)
 
+<a id="sec-8"></a>
 ### 2.1 Oxidationen: Vollständige Reagenzien-Matrix, Bedingungen & Selektivität
 
 #### A. Oxidation von Alkoholen zu Aldehyden, Ketonen und Carbonsäuren
@@ -203,6 +239,7 @@ Bei unsymmetrischen Ketonen (z. B. 2-Methylcyclohexanon) entscheidet die Reaktio
 
 ---
 
+<a id="sec-9"></a>
 ### 2.2 Reduktionen: Vollständige Reagenzien- & Chemoselektivitäts-Matrix
 
 #### A. Universelle Chemoselektivitäts-Matrix der Hydrid- und Reduktionsmittel
@@ -298,6 +335,7 @@ Bei unsymmetrischen Ketonen (z. B. 2-Methylcyclohexanon) entscheidet die Reaktio
 
 ---
 
+<a id="sec-10"></a>
 ### 2.3 C-C-Knüpfungen: Organometall-Reagenzien, Olefinierungen & Kreuzkupplungen
 
 #### A. Polare Organometall-Reagenzien ($\text{RMgX}, \text{RLi}, \text{R}_2\text{CuLi}, \text{RZnX}$)
@@ -363,10 +401,12 @@ Bei unsymmetrischen Ketonen (z. B. 2-Methylcyclohexanon) entscheidet die Reaktio
 
 ---
 
+<a id="sec-11"></a>
 ## 3. Schutzgruppen-Strategie & Orthogonalität (Systematik nach Greene & Wuts)
 
 > **Definition der Orthogonalität:** Zwei Schutzgruppen $P_1$ und $P_2$ sind **orthogonal**, wenn jede von ihnen durch ein spezifisches Reaktionsprinzip (z. B. Fluorid, Hydrogenolyse, milde Säure, Base, $\text{Pd(0)}$, Photolyse oder Oxidation) in hoher Ausbeute abgespalten werden kann, ohne dass die jeweils andere Schutzgruppe oder sonstige funktionelle Gruppen im Molekül angegriffen werden.
 
+<a id="sec-12"></a>
 ### 3.1 Alkohol-Schutzgruppen ($\text{R-OH}$) & 1,2-/1,3-Diol-Schutzgruppen
 
 #### A. Silylether ($\text{R-O-SiR}'_3$): Quantitative Abstufung der Säure- vs. Fluorid-Stabilität
@@ -406,6 +446,7 @@ Bei unsymmetrischen Ketonen (z. B. 2-Methylcyclohexanon) entscheidet die Reaktio
 
 ---
 
+<a id="sec-13"></a>
 ### 3.2 Amin-Schutzgruppen ($\text{R-NH}_2$ / $\text{R}_2\text{NH}$)
 
 | Schutzgruppe (Kürzel & Struktur) | Einführung (Standard-Reagenzien & Bedingungen) | Stabilitäts-Profil | Selektive Abspaltung (`Deprotection`) | Orthogonalität & Kritische Labor-Hinweise |
@@ -419,6 +460,7 @@ Bei unsymmetrischen Ketonen (z. B. 2-Methylcyclohexanon) entscheidet die Reaktio
 
 ---
 
+<a id="sec-14"></a>
 ### 3.3 Carbonyl- & Carbonsäure-Schutzgruppen sowie Terminale Alkine
 
 | Geschützte Funktionalität | Schutzgruppe (Kürzel & Struktur) | Einführung (Standardbedingungen) | Stabilitäts-Profil | Selektive Abspaltung (`Deprotection`) | Spezifische Synthese-Anwendung & Orthogonalität |
@@ -432,6 +474,7 @@ Bei unsymmetrischen Ketonen (z. B. 2-Methylcyclohexanon) entscheidet die Reaktio
 
 ---
 
+<a id="sec-15"></a>
 ### 3.4 Master-Entscheidungsmatrix der Orthogonalen Entschützung
 
 > **`[X]`** = Schutzgruppe wird unter diesen Bedingungen **quantitativ abgespalten (`CLEAVED`)**; **`[·]`** = Schutzgruppe bleibt **vollständig stabil (`INTACT`)**!
@@ -450,8 +493,10 @@ Bei unsymmetrischen Ketonen (z. B. 2-Methylcyclohexanon) entscheidet die Reaktio
 
 ---
 
+<a id="sec-16"></a>
 ## 4. $\text{p}K_\text{S}$- & Lösungsmittel-Referenz für Synthese und Aufarbeitung
 
+<a id="sec-17"></a>
 ### 4.1 Vollständige $\text{p}K_\text{S}$-Referenzskala ($\text{H}_2\text{O}$ und $\text{DMSO}$) & Deprotonierungs-Thermodynamik
 
 > **Quantitatives Deprotonierungs-Gesetz:** Für eine Säure-Base-Reaktion $\text{H-A} + \text{B}^- \rightleftharpoons \text{A}^- + \text{H-B}$ gilt für die Gleichgewichtskonstante $K_{\text{eq}}$ bei $25\,^\circ\text{C}$:
@@ -504,6 +549,7 @@ Bei unsymmetrischen Ketonen (z. B. 2-Methylcyclohexanon) entscheidet die Reaktio
 
 ---
 
+<a id="sec-18"></a>
 ### 4.2 Vollständige Labor-Lösungsmittel-Referenz (Physikalische Daten, Wassergehalt, Azeotrope & Trocknung)
 
 > **Praxis-Gesetze für Extraktion und Rotationsverdampfer (aus LibreTexts Lab Techniques & Prozesschemie):**

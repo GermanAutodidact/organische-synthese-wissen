@@ -4,8 +4,39 @@ Dieses Modul überträgt sämtliche praktischen Methoden, Daten-Tabellen, Rezept
 
 ---
 
+<!-- TOC_START -->
+## Inhaltsverzeichnis & Zeilen-Index
+
+| Abschnitt | Ebene | Zeilen |
+| :--- | :--- | :---: |
+| [1. Reaktionsführung, Apparatur-Praxis & Schutzgastechnik](#sec-1) | Hauptabschnitt | Z. 37–38 |
+| ↳ [1.1 Glasgeräte, Schliffe, Fetten & Proben-Transfer](#sec-2) | Unterabschnitt | Z. 40–54 |
+| ↳ [1.2 Kühlbäder (`Cooling Baths`): Vollständige Temperatur-Referenz ($0\,^\circ\text{C}$ bis $-196\,^\circ\text{C}$)](#sec-3) | Unterabschnitt | Z. 56–81 |
+| ↳ [1.3 Heizmethoden, Rückfluss (`Reflux`), Tropftrichter & Inertgas-Technik](#sec-4) | Unterabschnitt | Z. 83–106 |
+| [2. Die Quench- & Aufarbeitungs-Kaskade (`Workup`)](#sec-5) | Hauptabschnitt | Z. 108–109 |
+| ↳ [2.1 Gezieltes Quenchen überschüssiger Reagenzien (Reagenz-spezifische Quench-Matrix)](#sec-6) | Unterabschnitt | Z. 111–132 |
+| ↳ [2.2 Flüssig-Flüssig-Extraktion: Verteilungsgesetz, Phasenbestimmung & Säure-Base-Trennungs-Kaskade](#sec-7) | Unterabschnitt | Z. 134–172 |
+| ↳ [2.3 Praktische Problemlösung im Scheidetrichter: Emulsionen, Brine, Trocknungsmittel & Rotationsverdampfer](#sec-8) | Unterabschnitt | Z. 174–208 |
+| [3. Reinigungsverfahren: Umkristallisation, Destillation, Sublimation & Chromatographie](#sec-9) | Hauptabschnitt | Z. 210–211 |
+| ↳ [3.1 Umkristallisation (`Crystallization`, LibreTexts Kapitel 3)](#sec-10) | Unterabschnitt | Z. 213–231 |
+| ↳ [3.2 Destillation & Sublimation (LibreTexts Kapitel 5 & 6.03)](#sec-11) | Unterabschnitt | Z. 233–256 |
+| ↳ [3.3 Dünnschichtchromatographie (`DC`/`TLC`), Anfärbereagenzien & Säulenchromatographie](#sec-12) | Unterabschnitt | Z. 258–298 |
+| ↳ [3.4 Gaschromatographie (`GC`), Chirale HPLC/SFC & Prozess-Kristallisation (`Scale-up`)](#sec-13) | Unterabschnitt | Z. 300–322 |
+| [4. Analytik, Nasschemische Nachweise & Instrumentelle Strukturaufklärung](#sec-14) | Hauptabschnitt | Z. 324–325 |
+| ↳ [4.1 Schmelzpunkt (`mp`), Mischschmelzpunkt & Klassische Nasschemische Nachweise (LibreTexts Kapitel 6)](#sec-15) | Unterabschnitt | Z. 327–354 |
+| ↳ [4.2 Infrarot- (`IR`) & Raman-Spektroskopie (inkl. Spektroskopie-Praxisregeln)](#sec-16) | Unterabschnitt | Z. 356–389 |
+| ↳ [4.3 $^1\text{H}$- und $^{13}\text{C}$-NMR-Spektroskopie, Restlösungsmittel & `nmrglue`-Prozessierung](#sec-17) | Unterabschnitt | Z. 391–434 |
+| ↳ [4.4 Massenspektrometrie (`MS`, `HRMS`, `MS/MS`), Fragmentierung, `matchms`/`pyOpenMS` & Methodenvalidierung](#sec-18) | Unterabschnitt | Z. 436–476 |
+| ↳ [4.5 Organometall-, Photoredox- & Elektrochemische Charakterisierung (`organometallic-chemist`, `photochemist`, `electrochemist`)](#sec-19) | Unterabschnitt | Z. 478–490 |
+
+---
+
+<!-- TOC_END -->
+
+<a id="sec-1"></a>
 ## 1. Reaktionsführung, Apparatur-Praxis & Schutzgastechnik
 
+<a id="sec-2"></a>
 ### 1.1 Glasgeräte, Schliffe, Fetten & Proben-Transfer
 
 1. **Schliffe (`Ground Glass Joints`) & Schlifffett:**
@@ -21,11 +52,12 @@ Dieses Modul überträgt sämtliche praktischen Methoden, Daten-Tabellen, Rezept
 
 ---
 
+<a id="sec-3"></a>
 ### 1.2 Kühlbäder (`Cooling Baths`): Vollständige Temperatur-Referenz ($0\,^\circ\text{C}$ bis $-196\,^\circ\text{C}$)
 
 > **Labor-Regeln für Kühlbäder (LibreTexts 1.4J):**
 > - Für Bäder **kälter als $-10\,^\circ\text{C}$** zwingend ein **isoliertes Dewar-Gefäß** (mit Schutznetz/Kunststoffummantelung gegen Implosion!) verwenden, kein offenes Becherglas (sonst schlägt sich Luftfeuchtigkeit als Eis nieder und das Bad erwärmt sich zu schnell).
-> - **Trockeneis-Zugabe:** Trockeneis ($\text{CO}_2\text{(s)}$, Sublimationspunkt $-78.5\,^\circ\text{C}$) **immer langsam in kleinen Stücken** zum vorgekühlten Lösungsmittel (Aceton, $\text{MeCN}$, $\text{EtOAc}$, $\text{MeOH}$) geben – bei zu schneller Zugabe schäumt die Lösung durch heftige $\text{CO}_2$-Gasentwicklung über!
+> - **Trockeneis-Zugabe:** Trockeneis ($\text{CO}_2\text{(s)}$, Sublimationspunkt $-78.5\,^\circ\text{C}$) **immer langsam in kleinen Stücken** zum vorgekühlten Lösungsmittel (Aceton, Isopropanol, $\text{MeCN}$, $\text{CHCl}_3$, $\text{MeOH}$) geben – bei zu schneller Zugabe schäumt die Lösung durch heftige $\text{CO}_2$-Gasentwicklung über! Temperaturen unterhalb von $-78\,^\circ\text{C}$ erfordern zwingend **flüssigen Stickstoff ($\text{N}_2\text{(fl.)}$)** als Kälteträger.
 > - **Sicherheit:** Niemals Trockeneis oder Bäder $<-10\,^\circ\text{C}$ mit bloßen Händen berühren (**schwere Kälteverbrennungen / Erfrierungen!**). Bei Verwendung von **flüssigem Stickstoff ($\text{N}_2\text{(fl.)}, -196\,^\circ\text{C}$)** niemals offene Gefäße mit Luftzutritt lange tiefkühlen, da **flüssiger Sauerstoff ($\text{bp } -183\,^\circ\text{C}$, blassblau!)** aus der Luft einkondensiert und mit organischen Lösungsmitteln extrem explosive Gemische bildet!
 
 | Bad-Zusammensetzung (Mischungsverhältnis pro $100\text{ g}$ Eis bzw. Lösungsmittel) | Erzielte Zieltemperatur ($^\circ\text{C}$) | Typische Synthese-Anwendung |
@@ -37,15 +69,17 @@ Dieses Modul überträgt sämtliche praktischen Methoden, Daten-Tabellen, Rezept
 | **$125\text{ g CaCl}_2\cdot 6\text{H}_2\text{O} + 100\text{ g}$ zerstoßenes Eis** | **$-40\text{ bis }-50\,^\circ\text{C}$** | Kryoreaktionen ohne Trockeneis |
 | **Acetonitril ($\text{MeCN}$) + Trockeneis ($\text{CO}_2\text{(s)}$)** | **$-40\,^\circ\text{C}$** | Kinetische Deprotonierungen, Grignard-Halogen-Metall-Austausch ($i\text{-PrMgCl}\cdot\text{LiCl}$) |
 | **Chloroform ($\text{CHCl}_3$) + Trockeneis** *(im Abzug!)* | **$-61\,^\circ\text{C}$** | Kinetische Enolisierungen |
+| **Methanol ($\text{MeOH}$) + Trockeneis ($\text{CO}_2\text{(s)}$)** | **$-72\,^\circ\text{C}$** | Alternative zu Aceton/Trockeneis; Achtung bei Feuchtigkeit: $\text{MeOH}$ ist hygroskopisch |
 | **Aceton oder Isopropanol + Trockeneis ($\text{CO}_2\text{(s)}$)** | **$-78\,^\circ\text{C}$** | **Standard-Kryobad!** $\text{LDA}$, $n\text{-BuLi}/t\text{-BuLi}$, $\text{DIBAL-H}$, Swern-Oxidation, Ozonolyse, Ireland-Claisen |
-| **Ethylacetat ($\text{EtOAc}$) + Trockeneis** | **$-84\,^\circ\text{C}$** | Extrem selektiver Halogen-Lithium-Austausch |
-| **$n$-Hexan + flüssiger Stickstoff ($\text{N}_2\text{(fl.)}$)** / Trockeneis | **$-95\,^\circ\text{C}$** | Hochselektive Enolat-/Carbenoid-Bildungen ($\text{LiCH}_2\text{Cl}$!) |
-| **Methanol ($\text{MeOH}$) + Trockeneis** *(Achtung: zähflüssig!)* / **$\text{N}_2\text{(fl.)}$** | **$-98\,^\circ\text{C}$** | Instabile Organolithium-Spezies (z. B. $\alpha$-Halogenalkyllithium bei $-100\,^\circ\text{C}$) |
+| **Ethylacetat ($\text{EtOAc}$) + flüssiger Stickstoff ($\text{N}_2\text{(fl.)}$, Slush)** | **$-84\,^\circ\text{C}$** | Extrem selektiver Halogen-Lithium-Austausch *(mit Trockeneis physikalisch nicht unter $-78{,}5\,^\circ\text{C}$ kühlbar!)* |
+| **$n$-Hexan + flüssiger Stickstoff ($\text{N}_2\text{(fl.)}$, Slush)** | **$-94\text{ bis }-95\,^\circ\text{C}$** | Hochselektive Enolat-/Carbenoid-Bildungen ($\text{LiCH}_2\text{Cl}$!) |
+| **Methanol ($\text{MeOH}$) + flüssiger Stickstoff ($\text{N}_2\text{(fl.)}$, Slush)** *(Achtung: zähflüssig!)* | **$-98\,^\circ\text{C}$** | Instabile Organolithium-Spezies (z. B. $\alpha$-Halogenalkyllithium bei $-100\,^\circ\text{C}$) |
 | **Diethylether ($\text{Et}_2\text{O}$) + flüssiger Stickstoff ($\text{N}_2\text{(fl.)}$)** | **$-116\,^\circ\text{C}$** | Extrem instabile Carbenoide; **Freeze-Pump-Thaw** von $\text{THF}/\text{Et}_2\text{O}$ |
 | **Flüssiger Stickstoff ($\text{N}_2\text{(fl.)}$)** | **$-196\,^\circ\text{C}$** | **Freeze-Pump-Thaw-Entgasen**, Kühlfallen (`Cold Traps`) an Vakuumpumpen und Schlenk-Linien |
 
 ---
 
+<a id="sec-4"></a>
 ### 1.3 Heizmethoden, Rückfluss (`Reflux`), Tropftrichter & Inertgas-Technik
 
 1. **Heizquellen-Auswahl & Brandvermeidung (LibreTexts 1.4A–1.4I):**
@@ -70,8 +104,10 @@ Dieses Modul überträgt sämtliche praktischen Methoden, Daten-Tabellen, Rezept
 
 ---
 
+<a id="sec-5"></a>
 ## 2. Die Quench- & Aufarbeitungs-Kaskade (`Workup`)
 
+<a id="sec-6"></a>
 ### 2.1 Gezieltes Quenchen überschüssiger Reagenzien (Reagenz-spezifische Quench-Matrix)
 
 > **Oberstes Quench-Gesetz:** **Vor jeder Aufarbeitung im Scheidetrichter** müssen reaktive, wasserempfindliche, pyrophore oder stark oxidierende Reagenzüberschüsse bei **Kühlung ($0\,^\circ\text{C}$ oder $-78\,^\circ\text{C}$)** kontrolliert vernichtet werden! Ein ungelöschtes Reagenz im Scheidetrichter erzeugt explosionsartigen Überdruck (Stopfen fliegt heraus, Inhalt spritzt ins Gesicht!) oder zerstört das Produkt.
@@ -94,6 +130,7 @@ Dieses Modul überträgt sämtliche praktischen Methoden, Daten-Tabellen, Rezept
 
 ---
 
+<a id="sec-7"></a>
 ### 2.2 Flüssig-Flüssig-Extraktion: Verteilungsgesetz, Phasenbestimmung & Säure-Base-Trennungs-Kaskade
 
 #### A. Mathematisches Gesetz der Mehrfachextraktion (`Multiple Extractions`)
@@ -133,6 +170,7 @@ Zur Trennung eines komplexen Gemisches aus **starker organischer Säure** ($\tex
 
 ---
 
+<a id="sec-8"></a>
 ### 2.3 Praktische Problemlösung im Scheidetrichter: Emulsionen, Brine, Trocknungsmittel & Rotationsverdampfer
 
 #### A. 6 Bewährte Methoden zum Brechen stabiler Emulsionen
@@ -168,8 +206,10 @@ Zur Trennung eines komplexen Gemisches aus **starker organischer Säure** ($\tex
 
 ---
 
+<a id="sec-9"></a>
 ## 3. Reinigungsverfahren: Umkristallisation, Destillation, Sublimation & Chromatographie
 
+<a id="sec-10"></a>
 ### 3.1 Umkristallisation (`Crystallization`, LibreTexts Kapitel 3)
 
 1. **Prinzip & Auswahl des Lösungsmittels:**
@@ -189,6 +229,7 @@ Zur Trennung eines komplexen Gemisches aus **starker organischer Säure** ($\tex
 
 ---
 
+<a id="sec-11"></a>
 ### 3.2 Destillation & Sublimation (LibreTexts Kapitel 5 & 6.03)
 
 #### A. Auswahl der richtigen Destillationsmethode
@@ -213,6 +254,7 @@ Zur Trennung eines komplexen Gemisches aus **starker organischer Säure** ($\tex
 
 ---
 
+<a id="sec-12"></a>
 ### 3.3 Dünnschichtchromatographie (`DC`/`TLC`), Anfärbereagenzien & Säulenchromatographie
 
 #### A. DC-Optimierung, Co-Spot-Gesetz & Elutionskraft (Eluotrope Reihe)
@@ -254,6 +296,7 @@ Zur Trennung eines komplexen Gemisches aus **starker organischer Säure** ($\tex
 
 ---
 
+<a id="sec-13"></a>
 ### 3.4 Gaschromatographie (`GC`), Chirale HPLC/SFC & Prozess-Kristallisation (`Scale-up`)
 
 1. **Gaschromatographie (`GC`, LibreTexts 2.05 & `analytical-chemist`):**
@@ -277,8 +320,10 @@ Zur Trennung eines komplexen Gemisches aus **starker organischer Säure** ($\tex
 
 ---
 
+<a id="sec-14"></a>
 ## 4. Analytik, Nasschemische Nachweise & Instrumentelle Strukturaufklärung
 
+<a id="sec-15"></a>
 ### 4.1 Schmelzpunkt (`mp`), Mischschmelzpunkt & Klassische Nasschemische Nachweise (LibreTexts Kapitel 6)
 
 #### A. Schmelzpunkt (`Melting Point`, LibreTexts 6.01)
@@ -307,6 +352,7 @@ Zur Trennung eines komplexen Gemisches aus **starker organischer Säure** ($\tex
 
 ---
 
+<a id="sec-16"></a>
 ### 4.2 Infrarot- (`IR`) & Raman-Spektroskopie (inkl. Spektroskopie-Praxisregeln)
 
 > **Spektroskopische Praxisregeln (`spectroscopist`):**
@@ -341,6 +387,7 @@ Zur Trennung eines komplexen Gemisches aus **starker organischer Säure** ($\tex
 
 ---
 
+<a id="sec-17"></a>
 ### 4.3 $^1\text{H}$- und $^{13}\text{C}$-NMR-Spektroskopie, Restlösungsmittel & `nmrglue`-Prozessierung
 
 #### A. Vollständige Tabelle der Deuterierten NMR-Lösungsmittel & Häufigsten Labor-Verunreinigungen ($\delta$ in ppm, nach Gottlieb/Fulmer)
@@ -385,6 +432,7 @@ Zur Trennung eines komplexen Gemisches aus **starker organischer Säure** ($\tex
 
 ---
 
+<a id="sec-18"></a>
 ### 4.4 Massenspektrometrie (`MS`, `HRMS`, `MS/MS`), Fragmentierung, `matchms`/`pyOpenMS` & Methodenvalidierung
 
 #### A. Summenformel-Gesetze, RDBE, Stickstoffregel & Isotopenmuster (`mass-spectrometrist`)
@@ -426,6 +474,7 @@ Zur Trennung eines komplexen Gemisches aus **starker organischer Säure** ($\tex
   - **DL & QL:** $\text{S/N } 3:1$ ($\text{DL}$) und $\text{S/N } \ge 10:1$ ($\text{QL}$) bzw. $3.3\sigma/S$ und $10\sigma/S$, **plus zwingende experimentelle Bestätigung am Limit** ($\text{QL} \le \text{Reporting Threshold}$); bei $\text{RRF} \notin [0.8, 1.2]$ Response-Faktor-Korrektur anwenden!
   - **LC-MS/MS System Suitability & MRM:** Mindestens **$8\text{--}10$ Datenpunkte pro Peak**, $2$ MRM-Übergänge (`Quantifier` + `Qualifier` mit Ionenverhältnis $\pm 20\text{--}30\,\%$), Carryover nach ULOQ **$< 20\,\%$ LLOQ** (und $\le 5\,\%$ IS), SST-Flächen-RSD $\le 15\,\%$.
 
+<a id="sec-19"></a>
 ### 4.5 Organometall-, Photoredox- & Elektrochemische Charakterisierung (`organometallic-chemist`, `photochemist`, `electrochemist`)
 
 1. **Organometall-Katalyse & Homogenitäts-Kontrolle (`organometallic-chemist`):**

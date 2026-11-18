@@ -1,0 +1,18 @@
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+
+Copyright (c) 2026 GermanAutodidact & Upstream Contributors (siehe NOTICE.md)
+
+Dieses konsolidierte Wissens-Repository enthält adaptiertes und übersetztes Material aus mehreren offenen Quellen, darunter *Organic Chemistry Lab Techniques* (Lisa Nichols, Chemistry LibreTexts), das unter CC BY-NC-SA 4.0 lizenziert ist. Gemäß der ShareAlike- und NonCommercial-Bedingung steht dieses Gesamtwerk unter **CC BY-NC-SA 4.0**.
+
+Sie dürfen:
+- **Teilen** — das Material in jedwedem Format oder Medium vervielfältigen und weiterverbreiten.
+- **Bearbeiten** — das Material remixen, verändern und darauf aufbauen.
+
+Unter folgenden Bedingungen:
+- **Namensnennung (Attribution)** — Angemessene Urheber- und Rechteangaben (siehe `NOTICE.md`), einen Link zur Lizenz beifügen und angeben, ob Änderungen vorgenommen wurden.
+- **Nicht kommerziell (NonCommercial)** — Sie dürfen das Material nicht für kommerzielle Zwecke nutzen.
+- **Weitergabe unter gleichen Bedingungen (ShareAlike)** — Wenn Sie das Material remixen, verändern oder darauf anderweitig direkt aufbauen, dürfen Sie Ihre Beiträge nur unter derselben Lizenz wie das Original verbreiten.
+
+Die selbst geschriebenen Hilfsskripte unter `scripts/` stehen zusätzlich unter der MIT-Lizenz, soweit sie unabhängig vom CC-BY-NC-SA-Text genutzt werden.
+
+Vollständiger Lizenztext: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
