@@ -20,9 +20,18 @@ Dieses private Repository enthält die konsolidierte, verifizierte Wissensdatenb
 5. **`rxno`** — Royal Society of Chemistry Reaction Ontology (`RXNO` & `MOP`).
 6. **`libretexts_lab_techniques`** — Lisa Nichols: *Organic Chemistry Lab Techniques* (162 Kapitel, Kapitel 01–07).
 
-## Verwendung als KI-Skill
+## Verwendung in verschiedenen KI-Systemen
 
-Den Inhalt dieses Repositories (oder direkt `SKILL.md` + `references/`) in `~/.gemini/skills/organische-synthese-und-laborpraxis/` oder `.agents/skills/organische-synthese-und-laborpraxis/` ablegen.
+Das Repository folgt dem offenen **Agent-Skills-Standard (`SKILL.md` + `references/`)** und enthält direkt in `SKILL.md` (Abschnitt `0. KI-Nutzungsanleitung & Modul-Routing`) eine explizite Steuerungsanleitung für KIs.
+
+| KI-System | Kompatibilität | Einrichtung |
+| :--- | :---: | :--- |
+| **Antigravity / Gemini CLI** | Direkt nativ | Ordner als `organische-synthese-und-laborpraxis/` unter `~/.gemini/skills/` bzw. `.agents/skills/` ablegen. |
+| **Claude Code** | Direkt nativ | Repo/Ordner nach `~/.claude/skills/organische-synthese-und-laborpraxis/` oder `.claude/skills/` kopieren. |
+| **OpenAI Codex CLI / Cursor / Windsurf / OpenCode** | Direkt nativ | Repo/Ordner in `.agents/skills/` (oder `.cursor/skills/`) legen. |
+| **Claude Projects** | Über Knowledge | [`prompts/WEBCHAT_SYSTEM_PROMPT.md`](prompts/WEBCHAT_SYSTEM_PROMPT.md) in *Project Instructions* kopieren; `SKILL.md` + `references/01`–`03` (oder `KOMPLETTES_HANDBUCH_ORGANISCHE_SYNTHESE.md`) als *Project Knowledge* hochladen. |
+| **ChatGPT (Custom GPT)** | Mit Kompakt-Prompt + Knowledge | **Wichtig:** `SKILL.md` (~49 KB) ist für das 8.000-Zeichen-Feld *Instructions* zu groß. Kopiere stattdessen [`prompts/WEBCHAT_SYSTEM_PROMPT.md`](prompts/WEBCHAT_SYSTEM_PROMPT.md) ins *Instructions*-Feld und lade `SKILL.md` + `references/01`–`03` (oder `KOMPLETTES_HANDBUCH_ORGANISCHE_SYNTHESE.md`) als *Knowledge*-Dateien hoch. |
+| **Gemini Gems / NotebookLM** | Über Wissensdateien | [`prompts/WEBCHAT_SYSTEM_PROMPT.md`](prompts/WEBCHAT_SYSTEM_PROMPT.md) als System-Anweisung nutzen und `SKILL.md` + `references/KOMPLETTES_HANDBUCH_ORGANISCHE_SYNTHESE.md` als Quellen anhängen. |
 
 ## Validierung
 

@@ -11,6 +11,23 @@ Dieses Dokument definiert die **nicht verhandelbaren Arbeitsgesetze** für jede 
 
 ---
 
+## 0. KI-NUTZUNGSANLEITUNG & MODUL-ROUTING (VERBINDLICH FÜR JEDE KI)
+
+Dieses Regelwerk arbeitet nach dem Prinzip des **Progressive Disclosure** (Hauptregeln hier in `SKILL.md`, detaillierte Fachdaten und Matrizen in `references/`). Unabhängig davon, ob du als Agent mit Dateizugriff (Antigravity, Claude Code, Codex CLI, Cursor) oder als Web-Chat-KI mit hochgeladenen Wissensdateien (ChatGPT Custom GPT, Claude Projects, Gemini Gem, NotebookLM) arbeitest, gilt für dich folgender Workflow:
+
+1. **Immer zuerst anwenden (`SKILL.md`):** Prüfe jede Anfrage zwingend gegen die 5 Kerngesetze dieses Dokuments (Abschnitt 1: Anti-Halluzination & Valenz/Bilanz; Abschnitt 2: Struktur-Mapping & Elektronenschub; Abschnitt 3: Prozesssicherheit; Abschnitt 4: Labor-Logik/Workup; Abschnitt 5: 8-Punkte-Checkliste).
+2. **Gezieltes Nachladen der Referenzmodule (`references/`):** Lade je nach Aufgabenstellung **sofort** die passenden Detail-Dokumente aus `references/` (bzw. durchsuche sie in deiner Knowledge-Basis):
+   - **`references/01_Reaktionsmechanismen_Reagenzien_und_Selektivitaet.md`** $\rightarrow$ Bei Fragen zu $S_\text{N}1/S_\text{N}2/E1/E2$, elektrophilen Additionen, $S_\text{E}\text{Ar}/S_\text{N}\text{Ar}$, Carbonyl-/Enolat-Chemie, Pericyclik, Oxidationen, Reduktionen, Kreuzkupplungen, Schutzgruppen-Orthogonalität, $\text{p}K_\text{S}$-Werten oder Lösungsmitteln.
+   - **`references/02_Retrosynthese_und_Namensreaktionen_Katalog.md`** $\rightarrow$ Bei Syntheseplanung, Disconnections ($a^n/d^n$-Synthons, Umpolung), Baldwin-Regeln, Ringstrategien, `RXNO`/`ReactionClassifier`-SMIRKS-Mustern oder konkreten Namensreaktionen.
+   - **`references/03_Laborpraxis_Aufarbeitung_Trennung_und_Analytik.md`** $\rightarrow$ Bei praktischer Versuchsdurchführung, Kühlbädern, Inertgas-/Schlenk-Technik, Quench-Protokollen, Flüssig-Flüssig-/Säure-Base-Extraktion, Trocknungsmitteln, Umkristallisation, Destillation, DC-Laufmitteln/Anfärbereagenzien, Säulenchromatographie oder NMR/IR/MS-Auswertung.
+   - **`references/KOMPLETTES_HANDBUCH_ORGANISCHE_SYNTHESE.md`** $\rightarrow$ Gesamtausgabe aller Module (01–03) in einer Datei für Volltextsuchen oder Web-Chats mit nur einem Wissensdokument.
+   - **`references/00_INDEX_UND_KONTROLLLISTE.md`** $\rightarrow$ Quellenverzeichnis über alle 291 konsolidierten Primärdokumente.
+3. **Verhalten je nach Umgebung (Agent mit Tools vs. reiner Chat):**
+   - *Mit Shell/Python/RDKit/xTB:* Führe SMILES-Sanitization, Atom-/Ladungsbilanzen und SMARTS-Checks rechnerisch aus (`Tool Facts`).
+   - *Ohne lokale Tools (Web-Chat):* Rate niemals fehlende Stoffdaten (Siedepunkte, $\delta$-Werte, exakte Ausbeuten), sondern nutze nur verifizierte Werte aus `references/` oder markiere fehlende Literaturwerte explizit als **`[Verifizierung/Literaturwert nötig]`**.
+
+---
+
 ## 1. ANTI-HALLUZINATIONS- & VALENZ-GESETZ (STRUKTUR- UND BILANZWÄCHTER)
 
 ### 1.1 Absolutes Rate-Verbot für chemische Fakten und Stoffdaten
