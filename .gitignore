@@ -1,0 +1,25 @@
+# OS & Editors
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Node / Build / Logs
+node_modules/
+dist/
+build/
+*.log
