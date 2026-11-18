@@ -2,7 +2,7 @@
 
 > **Hinweis für KI-Agenten (Kontext-Budget):** Diese Datei ist ein **Nachschlage- und Registermodul** (~218 KB, 658 `RXNO`-Klassen, 84 `MOP`-Prozesse, SMIRKS-Granularitätsmatrizen). **Nicht pauschal vollständig in den Kontext laden**, sondern gezielt über das Inhaltsverzeichnis / per Suche oder Zeilenbereich (`view_file`) abfragen.
 
-Dieses Modul enthält die vollständigen tabellarischen Ontologie- und SMIRKS-Auswertungen zu `schwallergroup/ReactionClassifier` und `rsc-ontology/rxno` aus Modul `02`.
+Dieses Modul enthält die vollständigen tabellarischen Ontologie- und SMIRKS-Auswertungen zu `schwallergroup/ReactionClassifier` und `rsc-ontology/rxno` aus Modul `02`. Genannte Quell-Dateinamen (`granularity_examples.json`, `rxno-full.json`, `rxno/mop.obo`) verweisen auf die konsolidierten Upstream-Archive (Inhalte sind hier vollständig tabellarisch integriert).
 
 ---
 

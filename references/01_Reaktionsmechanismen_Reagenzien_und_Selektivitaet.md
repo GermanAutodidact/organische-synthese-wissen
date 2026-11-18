@@ -2,6 +2,8 @@
 
 Dieses Modul vereint die vollständige mechanistische und reagenzienspezifische Systematik aus `codex-organic-chem` (`mechanism.py`, `mechanism_semantics.py`, `reaction.py`, `semiempirical.py`, `tests/fixtures/mechanisms/*.json`), `scientific-agents` (`organic-chemist`, `process-chemist`, `organometallic-chemist`, `catalysis-scientist`, `physical-chemist`, `photochemist`, `electrochemist`), `rxno/mop.obo` (Molecular Process Ontology) und der `ReactionClassifier`-Taxonomie.
 
+> **Quellenhinweis:** Im Text genannte Dateinamen wie `mechanism.py`, `sn2.json`, `e2.json` oder `rxno/mop.obo` bezeichnen die konsolidierten Upstream-Primärquellen (keine lokalen Dateien in diesem Repo); für lokale Prüfungen steht `scripts/chem_check.py` bereit.
+
 ---
 
 <!-- TOC_START -->
@@ -9,24 +11,24 @@ Dieses Modul vereint die vollständige mechanistische und reagenzienspezifische 
 
 | Abschnitt | Ebene | Zeilen |
 | :--- | :--- | :---: |
-| [1. MECHANISMUS-ENTSCHEIDUNGSMATRIZEN & ELEMENTARSCHRITT-LOGIK](#sec-1) | Hauptabschnitt | Z. 36–37 |
-| ↳ [1.1 Konkurrenz von $S_\text{N}1$ vs. $S_\text{N}2$ vs. $E1$ vs. $E2$ an $sp^3$-Zentren](#sec-2) | Unterabschnitt | Z. 39–80 |
-| ↳ [1.2 Elektrophile Additionen an Alkene und Alkine ($\text{Ad}_\text{E}$)](#sec-3) | Unterabschnitt | Z. 82–101 |
-| ↳ [1.3 Aromatische Substitutionen: $S_\text{E}\text{Ar}$, $S_\text{N}\text{Ar}$, Arin-Mechanismus und Dirigierende Effekte](#sec-4) | Unterabschnitt | Z. 103–138 |
-| ↳ [1.4 Carbonylchemie: Reaktivitätsleiter, Addition-Eliminierung & Enolat-Selektivität](#sec-5) | Unterabschnitt | Z. 140–172 |
-| ↳ [1.5 Pericyclische Reaktionen und Umlagerungen](#sec-6) | Unterabschnitt | Z. 174–201 |
-| [2. Reagenzien- & Bedingungen-Tabellen (Oxidationen, Reduktionen, C-C-Knüpfungen)](#sec-7) | Hauptabschnitt | Z. 203–204 |
-| ↳ [2.1 Oxidationen: Vollständige Reagenzien-Matrix, Bedingungen & Selektivität](#sec-8) | Unterabschnitt | Z. 206–241 |
-| ↳ [2.2 Reduktionen: Vollständige Reagenzien- & Chemoselektivitäts-Matrix](#sec-9) | Unterabschnitt | Z. 243–337 |
-| ↳ [2.3 C-C-Knüpfungen: Organometall-Reagenzien, Olefinierungen & Kreuzkupplungen](#sec-10) | Unterabschnitt | Z. 339–403 |
-| [3. Schutzgruppen-Strategie & Orthogonalität (Systematik nach Greene & Wuts)](#sec-11) | Hauptabschnitt | Z. 405–408 |
-| ↳ [3.1 Alkohol-Schutzgruppen ($\text{R-OH}$) & 1,2-/1,3-Diol-Schutzgruppen](#sec-12) | Unterabschnitt | Z. 410–448 |
-| ↳ [3.2 Amin-Schutzgruppen ($\text{R-NH}_2$ / $\text{R}_2\text{NH}$)](#sec-13) | Unterabschnitt | Z. 450–462 |
-| ↳ [3.3 Carbonyl- & Carbonsäure-Schutzgruppen sowie Terminale Alkine](#sec-14) | Unterabschnitt | Z. 464–476 |
-| ↳ [3.4 Master-Entscheidungsmatrix der Orthogonalen Entschützung](#sec-15) | Unterabschnitt | Z. 478–495 |
-| [4. $\text{p}K_\text{S}$- & Lösungsmittel-Referenz für Synthese und Aufarbeitung](#sec-16) | Hauptabschnitt | Z. 497–498 |
-| ↳ [4.1 Vollständige $\text{p}K_\text{S}$-Referenzskala ($\text{H}_2\text{O}$ und $\text{DMSO}$) & Deprotonierungs-Thermodynamik](#sec-17) | Unterabschnitt | Z. 500–551 |
-| ↳ [4.2 Vollständige Labor-Lösungsmittel-Referenz (Physikalische Daten, Wassergehalt, Azeotrope & Trocknung)](#sec-18) | Unterabschnitt | Z. 553–588 |
+| [1. MECHANISMUS-ENTSCHEIDUNGSMATRIZEN & ELEMENTARSCHRITT-LOGIK](#sec-1) | Hauptabschnitt | Z. 38–39 |
+| ↳ [1.1 Konkurrenz von $S_\text{N}1$ vs. $S_\text{N}2$ vs. $E1$ vs. $E2$ an $sp^3$-Zentren](#sec-2) | Unterabschnitt | Z. 41–82 |
+| ↳ [1.2 Elektrophile Additionen an Alkene und Alkine ($\text{Ad}_\text{E}$)](#sec-3) | Unterabschnitt | Z. 84–103 |
+| ↳ [1.3 Aromatische Substitutionen: $S_\text{E}\text{Ar}$, $S_\text{N}\text{Ar}$, Arin-Mechanismus und Dirigierende Effekte](#sec-4) | Unterabschnitt | Z. 105–140 |
+| ↳ [1.4 Carbonylchemie: Reaktivitätsleiter, Addition-Eliminierung & Enolat-Selektivität](#sec-5) | Unterabschnitt | Z. 142–174 |
+| ↳ [1.5 Pericyclische Reaktionen und Umlagerungen](#sec-6) | Unterabschnitt | Z. 176–203 |
+| [2. Reagenzien- & Bedingungen-Tabellen (Oxidationen, Reduktionen, C-C-Knüpfungen)](#sec-7) | Hauptabschnitt | Z. 205–206 |
+| ↳ [2.1 Oxidationen: Vollständige Reagenzien-Matrix, Bedingungen & Selektivität](#sec-8) | Unterabschnitt | Z. 208–243 |
+| ↳ [2.2 Reduktionen: Vollständige Reagenzien- & Chemoselektivitäts-Matrix](#sec-9) | Unterabschnitt | Z. 245–339 |
+| ↳ [2.3 C-C-Knüpfungen: Organometall-Reagenzien, Olefinierungen & Kreuzkupplungen](#sec-10) | Unterabschnitt | Z. 341–405 |
+| [3. Schutzgruppen-Strategie & Orthogonalität (Systematik nach Greene & Wuts)](#sec-11) | Hauptabschnitt | Z. 407–410 |
+| ↳ [3.1 Alkohol-Schutzgruppen ($\text{R-OH}$) & 1,2-/1,3-Diol-Schutzgruppen](#sec-12) | Unterabschnitt | Z. 412–450 |
+| ↳ [3.2 Amin-Schutzgruppen ($\text{R-NH}_2$ / $\text{R}_2\text{NH}$)](#sec-13) | Unterabschnitt | Z. 452–464 |
+| ↳ [3.3 Carbonyl- & Carbonsäure-Schutzgruppen sowie Terminale Alkine](#sec-14) | Unterabschnitt | Z. 466–478 |
+| ↳ [3.4 Master-Entscheidungsmatrix der Orthogonalen Entschützung](#sec-15) | Unterabschnitt | Z. 480–497 |
+| [4. $\text{p}K_\text{S}$- & Lösungsmittel-Referenz für Synthese und Aufarbeitung](#sec-16) | Hauptabschnitt | Z. 499–500 |
+| ↳ [4.1 Vollständige $\text{p}K_\text{S}$-Referenzskala ($\text{H}_2\text{O}$ und $\text{DMSO}$) & Deprotonierungs-Thermodynamik](#sec-17) | Unterabschnitt | Z. 502–553 |
+| ↳ [4.2 Vollständige Labor-Lösungsmittel-Referenz (Physikalische Daten, Wassergehalt, Azeotrope & Trocknung)](#sec-18) | Unterabschnitt | Z. 555–590 |
 
 ---
 

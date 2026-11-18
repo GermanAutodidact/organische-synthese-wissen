@@ -6,27 +6,26 @@
 
 ---
 
+<!-- TOC_START -->
 ## Gesamt-Inhaltsverzeichnis
 
-1. **MODUL 0 (`SKILL.md`):** KI-Nutzungsanleitung, Ethik-Schranke, Anti-Halluzinations- & Valenz-Gesetz, Mechanismus-Pflicht (MechanismSpec 2.1), Prozesssicherheit & Labor-Logik
-2. **MODUL 1 (`01_Reaktionsmechanismen_Reagenzien_und_Selektivitaet.md`):** Mechanismus-Entscheidungsmatrizen ($S_\text{N}1/S_\text{N}2/E1/E2/\text{E1cb}$, $\text{Ad}_\text{E}$, $S_\text{E}\text{Ar}/S_\text{N}\text{Ar}$, Carbonyl/Enolat, Pericyclik), Reagenzien-Tabellen, Schutzgruppen & Orthogonalität, $\text{p}K_\text{S}$- & Lösungsmittel-Referenz
-3. **MODUL 2 (`02_Retrosynthese_und_Namensreaktionen_Katalog.md`):** Retrosynthetische Systematik (Synthons $a^n/d^n$, Umpolung, 1,1–1,6-Disconnections, Baldwin-Regeln), Katalog der Organischen Namensreaktionen
-4. **MODUL 2b (`02b_Ontologie_RXNO_MOP_und_ReactionClassifier.md`):** Vollständige Granularitäts-SMIRKS-Matrizen (`ReactionClassifier`), 84 `MOP`-Prozesse & 658 aktive `RXNO`-Reaktionsklassen
-5. **MODUL 3 (`03_Laborpraxis_Aufarbeitung_Trennung_und_Analytik.md`):** Apparatur- & Schutzgastechnik, Kühlbäder, Quench-Kaskade, Säure-Base-Extraktion, Emulsionen & Trocknungsmittel, Umkristallisation, Destillation & Chromatographie (inkl. DC-Färberezepte), Nasschemische Tests, IR, NMR/`nmrglue`, MS/`matchms`/`pyOpenMS`, ICH-Validierung & Organometall-/Photoredox-/Elektrochemie
+| Modul | Inhalt | Zeilen |
+| :--- | :--- | :---: |
+| [MODUL 0 (`SKILL.md`)](#mod-0) | KI-Nutzungsanleitung, Ethik-Schranke, Anti-Halluzinations- & Valenz-Gesetz, Mechanismus-Pflicht (MechanismSpec 2.1), Prozesssicherheit & Labor-Logik | Z. 26–286 |
+| [MODUL 1 (`01_Reaktionsmechanismen_Reagenzien_und_Selektivitaet.md`)](#mod-1) | Mechanismus-Entscheidungsmatrizen ($S_\text{N}1/S_\text{N}2/E1/E2/\text{E1cb}$, $\text{Ad}_\text{E}$, $S_\text{E}\text{Ar}/S_\text{N}\text{Ar}$, Carbonyl/Enolat, Pericyclik), Reagenzien-Tabellen, Schutzgruppen & Orthogonalität, $\text{p}K_\text{S}$- & Lösungsmittel-Referenz | Z. 289–836 |
+| [MODUL 2 (`02_Retrosynthese_und_Namensreaktionen_Katalog.md`)](#mod-2) | Retrosynthetische Systematik (Synthons $a^n/d^n$, Umpolung, 1,1–1,6-Disconnections, Baldwin-Regeln), Katalog der Organischen Namensreaktionen | Z. 839–1081 |
+| [MODUL 2b (`02b_Ontologie_RXNO_MOP_und_ReactionClassifier.md`)](#mod-2b) | Vollständige Granularitäts-SMIRKS-Matrizen (`ReactionClassifier`), 84 `MOP`-Prozesse & 658 aktive `RXNO`-Reaktionsklassen | Z. 1084–1927 |
+| [MODUL 3 (`03_Laborpraxis_Aufarbeitung_Trennung_und_Analytik.md`)](#mod-3) | Apparatur- & Schutzgastechnik, Kühlbäder, Quench-Kaskade, Säure-Base-Extraktion, Emulsionen & Trocknungsmittel, Umkristallisation, Destillation & Chromatographie (inkl. DC-Färberezepte), Nasschemische Tests, IR, NMR/`nmrglue`, MS/`matchms`/`pyOpenMS`, ICH-Validierung & Organometall-/Photoredox-/Elektrochemie | Z. 1930–2375 |
 
 ---
 
+<!-- TOC_END -->
+
 <!-- ====================================================================== -->
+<a id="mod-0"></a>
 # MODUL 0: KI-HAUPTREGELWERK (`SKILL.md`)
 <!-- Quelle: SKILL.md -->
 
----
-name: organische-synthese-und-laborpraxis
-description: Vollständiges KI-Regelwerk für Organische Synthese, Reaktionsmechanismen, Retrosynthese, Stöchiometrie, Reagenzien-Selektivität, Prozesssicherheit und Labor-Aufarbeitung (Workup, Trennung, Spektroskopie). Use whenever working on organic synthesis planning, retrosynthesis, reaction mechanisms (electron pushing, valence/atom balance), reagent selectivity, protecting groups, lab workup/quench/extraction/purification, process safety, or NMR/IR/MS elucidation.
-metadata:
-    sources: codex-organic-chem (MechanismSpec 2.1, RDKit/GFN2-xTB/CREST Validation); scientific-agents (organic-chemist, process-chemist, medicinal-chemist, natural-products-chemist, organometallic-chemist, analytical-chemist, spectroscopist, mass-spectrometrist); scientific-agent-skills (rdkit, datamol, medchem, nmrglue, matchms, pyopenms, rowan, torchdrug); rsc-ontology/rxno & schwallergroup/ReactionClassifier; LibreTexts Organic Chemistry Lab Techniques (Lisa Nichols)
-    version: 2.2-DE
----
 # HAUPT-REGELWERK FÜR DIE KI: ORGANISCHE SYNTHESE, REAKTIONSMECHANISMEN & LABORPRAXIS (`SKILL.md`)
 
 Dieses Dokument definiert die **nicht verhandelbaren Arbeitsgesetze** für jede chemisch-synthetische, mechanistische, retrosynthetische, analytische und laborpraktische Auswertung. Die KI agiert als erfahrener Synthese-, Prozess- und Analytik-Chemiker, der von der elektronischen Struktur, Stereoelektronik und realen physikalisch-chemischen Prozesssicherheit her denkt — niemals aus auswendig gelernten Schlagworten oder unvollständigen Papier-Gleichungen.
@@ -162,12 +161,12 @@ Zur fehlerfreien Erkennung funktioneller Gruppen (direkt ausführbar via `script
 | **Carbonsäureester** | `[CX3](=O)[OX2H0][#6]` | `CC(=O)OC` | `CC(=O)O` (Hinweis: trifft auch Anhydride) |
 | **Amid** | `[CX3](=O)[NX3]` bzw. `[NX3][CX3](=[OX1])` | `CC(=O)N` | `CCN` (Amin) |
 | **Neutrales Amin (nicht Amid/Sulfonamid)** | `[NX3;$(N-[#6]);!$(N-C=O);!$(N-S(=O)=O);!$(N-P=O);!$(N=*)]` | `CCN` | `CC(=O)N` |
-| **Primäres Amin** | `[NX3H2;!$(N-C=O);!$(N-S(=O)=O);!$(N-P=O)]` | `CN` | `CNC` |
+| **Primäres Amin** | `[NX3H2;$(N-[#6]);!$(N-C=O);!$(N-S(=O)=O);!$(N-P=O)]` | `CN` | `CNC`, `N` (Ammoniak) |
 | **Ether (ohne Ester-Sauerstoff)** | `[#6][OX2H0;!$(O-C=O)][#6]` | `COC` | `CC(=O)OC` |
 | **Alkylhalogenid** | `[CX4][F,Cl,Br,I]` | `CCCl` | `Clc1ccccc1` (Arylhalogenid) |
 | **Arylhalogenid** | `c[F,Cl,Br,I]` | `Clc1ccccc1` | `CCCl` |
 | **Alken / Alkin / Nitril** | `C=C` / `C#C` / `C#N` | `C=CC` / `C#CC` / `CC#N` | Aromaten / Imine |
-| **Boronsäure** | `B(O)O` | `OB(O)c1ccccc1` | Boronsäureester |
+| **Boronsäure** | `[BX3]([OX2H1])[OX2H1]` | `OB(O)c1ccccc1` | `COB(OC)c1ccccc1` (Boronsäureester) |
 | **Nitrogruppe** | `[$([NX3](=O)=O),$([NX3+](=O)[O-])]` | `C[N+](=O)[O-]` | `CN` |
 | **Thiol / Sulfid (Thioether)** | `[#6][SX2H1]` / `[#6][SX2H0][#6]` | `CCS` / `CSC` | `CS(=O)C` |
 | **Sulfoxid / Sulfon** | `[#6][SX3](=O)[#6]` / `[#6][SX4](=O)(=O)[#6]` | `CS(=O)C` / `CS(=O)(=O)C` | `CSC` |
@@ -286,12 +285,15 @@ Bevor die KI eine Synthese-, Mechanismus- oder Laboranfrage abschließt, prüft 
 8. [ ] **Analytische Verifizierung:** Sind die diagnostischen Schlüsselbanden im IR, die charakteristischen $^1\text{H}$/$^{13}\text{C}$-NMR-Signale (inkl. Kopplungsmuster) und die erwarteten MS-Ionen/Isotopenmuster zur zweifelsfreien Identitäts- und Reinheitsbestätigung benannt?
 
 <!-- ====================================================================== -->
+<a id="mod-1"></a>
 # MODUL 1: REAKTIONSMECHANISMEN, REAGENZIEN & SELEKTIVITÄT
 <!-- Quelle: 01_Reaktionsmechanismen_Reagenzien_und_Selektivitaet.md -->
 
 # MODUL 01: REAKTIONSMECHANISMEN, REAGENZIEN UND SELEKTIVITÄT
 
 Dieses Modul vereint die vollständige mechanistische und reagenzienspezifische Systematik aus `codex-organic-chem` (`mechanism.py`, `mechanism_semantics.py`, `reaction.py`, `semiempirical.py`, `tests/fixtures/mechanisms/*.json`), `scientific-agents` (`organic-chemist`, `process-chemist`, `organometallic-chemist`, `catalysis-scientist`, `physical-chemist`, `photochemist`, `electrochemist`), `rxno/mop.obo` (Molecular Process Ontology) und der `ReactionClassifier`-Taxonomie.
+
+> **Quellenhinweis:** Im Text genannte Dateinamen wie `mechanism.py`, `sn2.json`, `e2.json` oder `rxno/mop.obo` bezeichnen die konsolidierten Upstream-Primärquellen (keine lokalen Dateien in diesem Repo); für lokale Prüfungen steht `scripts/chem_check.py` bereit.
 
 ---
 
@@ -833,12 +835,15 @@ Bei unsymmetrischen Ketonen (z. B. 2-Methylcyclohexanon) entscheidet die Reaktio
 | **Wasser ($\text{H}_2\text{O}$)** | $\text{H}_2\text{O}$ | Hochpolar protisch | **$78.4$** | **$100.0$** | **$0.0$** | **$0.998$** | — | Bildet Minimum-Azeotrope mit Toluol, Benzol, $\text{EtOH}, i\text{-PrOH}, \text{MeCN}, \text{EtOAc}, \text{THF}, \text{DCM}$ | — |
 
 <!-- ====================================================================== -->
+<a id="mod-2"></a>
 # MODUL 2: RETROSYNTHESE & NAMENSREAKTIONEN-KATALOG
 <!-- Quelle: 02_Retrosynthese_und_Namensreaktionen_Katalog.md -->
 
 # 02 – Retrosynthese-Systematik, Ontologie (`RXNO`/`MOP`), `ReactionClassifier`-Taxonomie & Namensreaktionen-Katalog
 
 Dieses Modul vereint die retrosynthetische Disconnection-Logik (nach Corey, Warren, Seebach sowie den retrosynthetischen Validierungsregeln aus `codex-organic-chem` und `scientific-agent-skills/torchdrug`) mit der vollständigen Auswertung der Royal Society of Chemistry Reaction Ontology (`rsc-ontology/rxno`, inkl. Molecular Processes `MOP`) und der hierarchischen SMARTS-Reaktionstaxonomie der Schwaller-Gruppe (`schwallergroup/ReactionClassifier`) sowie einem umfassenden Nachschlagewerk der zentralen organischen Namensreaktionen.
+
+> **Quellenhinweis:** Im Text genannte Quell-Dateinamen (z. B. `data/taxonomy.json`, `data/class_to_templates.json`) bezeichnen die konsolidierten Upstream-Archive (keine lokalen Dateien in diesem Repo); das vollständige Ontologie- und SMIRKS-Register liegt in `references/02b_Ontologie_RXNO_MOP_und_ReactionClassifier.md`.
 
 ---
 
@@ -939,7 +944,7 @@ Jeder nukleophile, radikalische oder kationische Ringschluss wird durch **3 Desk
 
 ---
 
-### 1.5 die 6 Goldenen Strategischen Regeln für Retrosynthetische Bindungsschnitte (Corey-LHASA & `codex-organic-chem`)
+### 1.5 Die 6 Goldenen Strategischen Regeln für Retrosynthetische Bindungsschnitte (Corey-LHASA & `codex-organic-chem`)
 
 1. **Maximaler Vereinfachungs-Schnitt (`Convergent Synthesis > Linear Synthesis`):**
    - Schneide das Zielmolekül nach Möglichkeit **in der Mitte** in zwei etwa gleich große, ähnlich komplexe Fragmente (**Konvergente Synthese**).
@@ -1075,6 +1080,7 @@ Jede Reaktion in diesem Katalog ist nach ihrer synthetischen Hauptfunktion gegli
 | **Katalytische Olefin-Metathese (`RCM/CM`), Staudinger-, Gabriel-, Ritter-, Nef-, Shapiro-, Eschenmoser-Tanabe- & Kulinkovich-Reaktion**<br>*(Auswahl weiterer essenzieller `RXNO`-Reaktionen)* | • **Ritter:** $\text{Alken / }3^\circ\text{-ROH} + \text{R-CN} + \text{H}_2\text{SO}_4 \xrightarrow{\text{H}_2\text{O}} \textbf{tert.-Alkylamid}$ (`R3C-NH-COR`).<br>• **Shapiro:** Keton-Tosylhydrazon + $2\,\text{Äq. }n\text{-BuLi}$ ($\text{THF}, -78\,^\circ\text{C} \rightarrow 0\,^\circ\text{C}$) $\rightarrow \textbf{Vinyllithium}$ ($\xrightarrow{\text{E}^+}$ substituiertes Alken am weniger gehinderten C!).<br>• **Eschweiler-Clarke:** $1^\circ/2^\circ$-Amin + $\text{CH}_2\text{O}$ + $\text{HCO}_2\text{H}$ ($100\,^\circ\text{C}$) $\rightarrow \textbf{tert. Methylamin}$ (stoppt exakt vor quartärem Ammoniumsalz!).<br>• **Nef:** $1^\circ/2^\circ$-Nitroalkan + Base ($\text{NaOMe}$) $\rightarrow$ dann $\text{H}_2\text{SO}_4/\text{H}_2\text{O}$ (oder $\text{TiCl}_3$ / $\text{KMnO}_4$) $\rightarrow \textbf{Aldehyd/Keton}$.<br>• **Kulinkovich:** Ester ($\text{RCO}_2\text{Et}$) + $2\,\text{Äq. }\text{EtMgBr}$ + kat. $\text{Ti(O}i\text{Pr)}_4$ ($\text{Et}_2\text{O}$, RT) $\rightarrow$ **1-substituiertes Cyclopropanol**! | • **Ritter:** Carbokation + Nitril $\rightarrow$ Nitrilium-Ion $\xrightarrow{\text{H}_2\text{O}}$ Amid.<br>• **Shapiro:** Zweifache Deprotonierung ($N$-H + das weniger gehinderte $\alpha$-C-H) $\rightarrow$ Verlust von $\text{Ts}^-$ und $\text{N}_2\uparrow$ zum Vinyllithium.<br>• **Eschweiler-Clarke:** Iminium-Ion + $\text{HCO}_2^-$ als Hydrid-Donor unter Verlust von $\text{CO}_2\uparrow$ (kein quartäres Salz, da $3^\circ$-Amin kein Iminium mehr bildet!). | Siehe jeweilige Standardbedingungen in der Produkt-Spalte links. | • **Ritter:** Beste Methode zur Einführung von $-\text{NH}_2$ an einem **quartären Kohlenstoffzentrum** (z. B. Amantadin, *tert*-Butylamin) durch anschließende Hydrolyse von Formamid ($\text{HCN}$) oder Chloracetamid ($\text{ClCH}_2\text{CN} \rightarrow$ Spaltung mit Thioharnstoff!).<br>• **Shapiro:** Liefert das regioisomere **weniger substituierte** Alken im Gegensatz zur sauren Bamford-Stevens-Reaktion (die das höher substituierte Zaitsev-Alken liefert!). |
 
 <!-- ====================================================================== -->
+<a id="mod-2b"></a>
 # MODUL 2b: ONTOLOGIE-REGISTER (`RXNO`/`MOP`) & `ReactionClassifier`-SMIRKS
 <!-- Quelle: 02b_Ontologie_RXNO_MOP_und_ReactionClassifier.md -->
 
@@ -1082,7 +1088,7 @@ Jede Reaktion in diesem Katalog ist nach ihrer synthetischen Hauptfunktion gegli
 
 > **Hinweis für KI-Agenten (Kontext-Budget):** Diese Datei ist ein **Nachschlage- und Registermodul** (~218 KB, 658 `RXNO`-Klassen, 84 `MOP`-Prozesse, SMIRKS-Granularitätsmatrizen). **Nicht pauschal vollständig in den Kontext laden**, sondern gezielt über das Inhaltsverzeichnis / per Suche oder Zeilenbereich (`view_file`) abfragen.
 
-Dieses Modul enthält die vollständigen tabellarischen Ontologie- und SMIRKS-Auswertungen zu `schwallergroup/ReactionClassifier` und `rsc-ontology/rxno` aus Modul `02`.
+Dieses Modul enthält die vollständigen tabellarischen Ontologie- und SMIRKS-Auswertungen zu `schwallergroup/ReactionClassifier` und `rsc-ontology/rxno` aus Modul `02`. Genannte Quell-Dateinamen (`granularity_examples.json`, `rxno-full.json`, `rxno/mop.obo`) verweisen auf die konsolidierten Upstream-Archive (Inhalte sind hier vollständig tabellarisch integriert).
 
 ---
 
@@ -1920,6 +1926,7 @@ Alle $658$ aktiven Knoten der Royal Society of Chemistry Reaction Ontology (`RXN
 ---
 
 <!-- ====================================================================== -->
+<a id="mod-3"></a>
 # MODUL 3: LABORPRAXIS, AUFARBEITUNG (`WORKUP`), TRENNUNG & ANALYTIK
 <!-- Quelle: 03_Laborpraxis_Aufarbeitung_Trennung_und_Analytik.md -->
 

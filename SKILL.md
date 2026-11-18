@@ -1,9 +1,9 @@
 ---
 name: organische-synthese-und-laborpraxis
-description: Vollständiges KI-Regelwerk für Organische Synthese, Reaktionsmechanismen, Retrosynthese, Stöchiometrie, Reagenzien-Selektivität, Prozesssicherheit und Labor-Aufarbeitung (Workup, Trennung, Spektroskopie). Use whenever working on organic synthesis planning, retrosynthesis, reaction mechanisms (electron pushing, valence/atom balance), reagent selectivity, protecting groups, lab workup/quench/extraction/purification, process safety, or NMR/IR/MS elucidation.
+description: Vollständiges KI-Regelwerk für Organische Synthese, Reaktionsmechanismen, Retrosynthese, Stöchiometrie, Reagenzien-Selektivität, Prozesssicherheit und Labor-Aufarbeitung (Workup, Trennung, Spektroskopie). Use whenever working on organic synthesis planning, retrosynthesis, reaction mechanisms (electron pushing, valence/atom balance), reagent selectivity, protecting groups, lab workup/quench/extraction/purification, process safety, or NMR/IR/MS elucidation. Don't use for pure inorganic/materials synthesis, molecular biology protocols, or general software engineering unrelated to chemistry.
 metadata:
     sources: codex-organic-chem (MechanismSpec 2.1, RDKit/GFN2-xTB/CREST Validation); scientific-agents (organic-chemist, process-chemist, medicinal-chemist, natural-products-chemist, organometallic-chemist, analytical-chemist, spectroscopist, mass-spectrometrist); scientific-agent-skills (rdkit, datamol, medchem, nmrglue, matchms, pyopenms, rowan, torchdrug); rsc-ontology/rxno & schwallergroup/ReactionClassifier; LibreTexts Organic Chemistry Lab Techniques (Lisa Nichols)
-    version: 2.2-DE
+    version: 2.3-DE
 ---
 # HAUPT-REGELWERK FÜR DIE KI: ORGANISCHE SYNTHESE, REAKTIONSMECHANISMEN & LABORPRAXIS (`SKILL.md`)
 
@@ -11,6 +11,37 @@ Dieses Dokument definiert die **nicht verhandelbaren Arbeitsgesetze** für jede 
 
 ---
 
+<!-- TOC_START -->
+## Inhaltsverzeichnis & Zeilen-Index
+
+| Abschnitt | Ebene | Zeilen |
+| :--- | :--- | :---: |
+| [0. KI-NUTZUNGSANLEITUNG, MODUL-ROUTING & ETHIK-SCHRANKE (VERBINDLICH FÜR JEDE KI)](#sec-1) | Hauptabschnitt | Z. 45–65 |
+| [1. ANTI-HALLUZINATIONS- & VALENZ-GESETZ (STRUKTUR- UND BILANZWÄCHTER)](#sec-2) | Hauptabschnitt | Z. 67–68 |
+| ↳ [1.1 Absolutes Rate-Verbot für chemische Fakten und Stoffdaten](#sec-3) | Unterabschnitt | Z. 70–78 |
+| ↳ [1.2 Valenz-, Oktett- und Sanitization-Gesetze (Molekulare Graph-Integrität)](#sec-4) | Unterabschnitt | Z. 80–98 |
+| ↳ [1.3 Gesetz der geschlossenen Massen-, Wasserstoff- und Ladungsbilanz](#sec-5) | Unterabschnitt | Z. 100–113 |
+| [2. FIRST-PRINCIPLES- & MECHANISMUS-PFLICHT](#sec-6) | Hauptabschnitt | Z. 115–116 |
+| ↳ [2.1 Struktur-Mapping vor Reaktionsnamen („Reason from structure, not from names“)](#sec-7) | Unterabschnitt | Z. 118–137 |
+| ↳ [2.2 Strenge Regeln der Elektronenschub-Buchhaltung (`MechanismSpec 2.1`)](#sec-8) | Unterabschnitt | Z. 139–158 |
+| ↳ [2.3 Visuelle & Graphische Qualitätsregeln für Mechanismen und Schemata](#sec-9) | Unterabschnitt | Z. 160–164 |
+| ↳ [2.4 Kanonische SMARTS-Muster zur Substruktur- und Funktionsgruppen-Erkennung](#sec-10) | Unterabschnitt | Z. 166–195 |
+| [3. PHYSIKALISCHE & CHEMISCHE PROZESSSICHERHEIT ZUERST](#sec-11) | Hauptabschnitt | Z. 197–200 |
+| ↳ [3.1 Exothermie, Adiabatischer Temperaturanstieg & Thermal Runaway](#sec-12) | Unterabschnitt | Z. 202–208 |
+| ↳ [3.2 Gasentwicklung & Überdruckgefahr (Explosionsschutz)](#sec-13) | Unterabschnitt | Z. 210–217 |
+| ↳ [3.3 Pyrophore, Wasserreaktive & Hochenergetische Reagenzien](#sec-14) | Unterabschnitt | Z. 219–236 |
+| ↳ [3.4 Inkompatible Stoffkombinationen & Akut Toxische Gase](#sec-15) | Unterabschnitt | Z. 238–255 |
+| [4. LABOR-LOGIK VOR PAPIER-CHEMIE (DER VOLLSTÄNDIGE PRAKTISCHE PFAD)](#sec-16) | Hauptabschnitt | Z. 257–262 |
+| ↳ [4.1 Pflicht-Parameter jeder Synthesevorschrift](#sec-17) | Unterabschnitt | Z. 264–269 |
+| ↳ [4.2 Das Gesetz der Nebenprodukt-Abtrennung (`Byproduct Purge Logic`)](#sec-18) | Unterabschnitt | Z. 271–291 |
+| ↳ [4.3 Ausschluss klassischer Fehlschlüsse (`Red Herrings` & `Common Pitfalls`)](#sec-19) | Unterabschnitt | Z. 293–302 |
+| [5. CHECKLISTE DER VOLLSTÄNDIGEN ANTWORT (`DEFINITION OF DONE`)](#sec-20) | Hauptabschnitt | Z. 304–314 |
+
+---
+
+<!-- TOC_END -->
+
+<a id="sec-1"></a>
 ## 0. KI-NUTZUNGSANLEITUNG, MODUL-ROUTING & ETHIK-SCHRANKE (VERBINDLICH FÜR JEDE KI)
 
 Dieses Regelwerk arbeitet nach dem Prinzip des **Progressive Disclosure** (Hauptregeln hier in `SKILL.md`, detaillierte Fachdaten und Matrizen in `references/`). Unabhängig davon, ob du als Agent mit Dateizugriff (Antigravity, Claude Code, Codex CLI, Cursor) oder als Web-Chat-KI mit hochgeladenen Wissensdateien (ChatGPT Custom GPT, Claude Projects, Gemini Gem, NotebookLM) arbeitest, gilt für dich folgender Workflow:
@@ -32,8 +63,10 @@ Dieses Regelwerk arbeitet nach dem Prinzip des **Progressive Disclosure** (Haupt
 
 ---
 
+<a id="sec-2"></a>
 ## 1. ANTI-HALLUZINATIONS- & VALENZ-GESETZ (STRUKTUR- UND BILANZWÄCHTER)
 
+<a id="sec-3"></a>
 ### 1.1 Absolutes Rate-Verbot für chemische Fakten und Stoffdaten
 1. **Niemals raten oder interpolieren:** Summenformeln, exakte oder mittlere Molmassen, Stöchiometrien, Ausbeuten (`Yield`), Enantiomeren-/Diastereomerenüberschüsse (`ee` / `dr`), Siedepunkte (`bp`), Schmelzpunkte (`mp`), Brechungsindizes, Dichten, $\text{p}K_\text{S}$-Werte, Retentionsfaktoren ($R_f$), chemische Verschiebungen ($\delta$ in ppm), Kopplungskonstanten ($J$ in Hz) oder Reaktionsprodukte dürfen unter keinen Umständen erfunden oder durch bloße Mustererkennung geraten werden.
 2. **Explizite Kennzeichnungspflicht bei Datenlücken:** Fehlen verifizierte Literaturdaten, experimentelle Referenzwerte oder Werkzeug-Berechnungen (z. B. kein Zugriff auf Reaxys/SciFinder/Organic Syntheses oder fehlendes Berechnungsmodul), **muss** der Parameter zwingend und sichtbar als **`[Verifizierung/Literaturwert nötig]`** markiert werden. Ein fehlendes optionales Software-Tool darf niemals als Vorwand dienen, Werte zu halluzinieren.
@@ -43,6 +76,7 @@ Dieses Regelwerk arbeitet nach dem Prinzip des **Progressive Disclosure** (Haupt
    - **Regelbasierte Ableitung (`Rule Inferences`):** Aus etablierten Selektivitäts-, $\text{p}K_\text{S}$- oder SMARTS-Regeln abgeleitete Vorhersagen.
    - **Hypothesen / Annahmen (`Hypotheses / Assumptions`):** Unbestätigte Mechanismus- oder Routenvorschläge müssen ausdrücklich als Hypothese deklariert werden.
 
+<a id="sec-4"></a>
 ### 1.2 Valenz-, Oktett- und Sanitization-Gesetze (Molekulare Graph-Integrität)
 Jede angegebene oder verarbeitete Molekülstruktur (`SMILES`, `CXSMILES`, `InChI`, `Molblock` oder Skelettformel) muss vor jeder weiteren Schlussfolgerung einer strikten Valenz- und Konsistenzprüfung unterzogen werden (per `scripts/chem_check.py sanitize`, RDKit `Chem.SanitizeMol` oder — *falls verfügbar* — externem Tool `chem_normalize_structure`):
 1. **Oktettregel & zulässige Hauptgruppen-Valenzen:**
@@ -62,6 +96,7 @@ Jede angegebene oder verarbeitete Molekülstruktur (`SMILES`, `CXSMILES`, `InChI
    - Wenn `scripts/chem_check.py sanitize` (RDKit `FindMolChiralCenters(..., includeUnassigned=True)`) unzugewiesene Stereozentren (`"?"`) meldet, Dummy-/Wildcard-Atome (Ordnungszahl 0, `*`), Übergangsmetalle (Ordnungszahlen `3, 4, 11-13, 19-31, 37-50, 55-57, 72-82`) oder große Moleküle ($>80$ Schweratome) vorliegen, muss eine explizite Warnung ausgegeben werden.
    - **Stereochemie-Verbot bei Bild-/OCSR-Import:** Aus zweidimensionalen Bildern oder OCSR-Ergebnissen (*falls* externe Bildparser wie `chem_parse_image` / `chem_parse_scheme` verfügbar sind) darf niemals eine Stereochemie ($R/S$, Keil-/Strichbindungen, $E/Z$) abgeleitet werden, die im Originalbild nicht explizit gezeichnet ist. Abkürzungen (`R`, `X`, `Boc`, `TBS`, `Ph`, `Ts`) müssen durch echte molekulare Graph-Ersetzung aufgelöst werden — niemals durch bloße Text-/String-Ersetzung im SMILES.
 
+<a id="sec-5"></a>
 ### 1.3 Gesetz der geschlossenen Massen-, Wasserstoff- und Ladungsbilanz
 Für jede Reaktionsgleichung und jeden Elementarschritt gilt die geschlossene Bilanzprüfung (ausführbar über `scripts/chem_check.py balance`, Regelbasis `codex-organic-chem`/`reaction.py`):
 1. **Implizite Wasserstoffe mitzählen:** In SMILES-basierten Molekülgraphen liefert eine naive Iteration über `GetAtoms()` keine impliziten H-Atome (wodurch `CC(=O)C >> CC(O)C` fälschlich als ausgeglichen erschiene, obwohl 2 H-Atome hinzugekommen sind). Für jedes Atom **muss** `atom.GetTotalNumHs()` zur H-Bilanz addiert werden (wobei explizite H-Knoten `[H:5]` nicht doppelt gezählt werden dürfen).
@@ -76,8 +111,10 @@ Für jede Reaktionsgleichung und jeden Elementarschritt gilt die geschlossene Bi
 
 ---
 
+<a id="sec-6"></a>
 ## 2. FIRST-PRINCIPLES- & MECHANISMUS-PFLICHT
 
+<a id="sec-7"></a>
 ### 2.1 Struktur-Mapping vor Reaktionsnamen („Reason from structure, not from names“)
 Bevor eine Reaktion vorgeschlagen, erklärt oder klassifiziert wird, muss aus der validierten Molekülstruktur eine **vollständige Struktur-Landkarte (`Structure Map`)** erstellt werden:
 1. **Funktionelle Gruppen & Hybridisierung:** Erfassung aller funktionellen Gruppen (siehe kanonische SMARTS-Tabelle in Abschnitt 2.4 bzw. `scripts/chem_check.py smarts`), Heteroatome, konjugierten $\pi$-Systeme und Aromaten.
@@ -98,6 +135,7 @@ Bevor eine Reaktion vorgeschlagen, erklärt oder klassifiziert wird, muss aus de
    - Abgangsgruppenqualität korreliert invers mit der Basizität der abgebenden Spezies (je niedriger der $\text{p}K_\text{S}$ der konjugierten Säure $\text{HX}$, desto besser die Abgangsgruppe $\text{X}^-$: $\text{OTf}^- > \text{OTs}^- \approx \text{OMs}^- > \text{I}^- > \text{Br}^- > \text{Cl}^- \gg \text{F}^-, \text{OH}^-, \text{OR}^-, \text{NH}_2^-$). Schlechte Abgangsgruppen ($\text{OH}$) müssen vor einer Substitution zwingend aktiviert werden (Protonierung zu $-\text{OH}_2^+$, Tosylierung/Mesylierung, Appel-, Mitsunobu- oder $\text{SOCl}_2$/$\text{PBr}_3$-Aktivierung).
    - Polar-protische Lösungsmittel ($\text{H}_2\text{O}, \text{MeOH}, \text{EtOH}, \text{AcOH}$) solvatisieren Anionen stark über Wasserstoffbrücken (stabilisieren Karbokationen und Abgangsgruppen $\rightarrow$ fördern $S_\text{N}1/E1$, dämpfen kleine harte Nukleophile). Polar-aprotische Lösungsmittel ($\text{DMF}, \text{DMSO}, \text{MeCN}, \text{Aceton}, \text{THF}, \text{DMPU}$) solvatisieren nur Kationen, lassen Anionen „nackt“ und hochreaktiv $\rightarrow$ beschleunigen $S_\text{N}2$ drastisch.
 
+<a id="sec-8"></a>
 ### 2.2 Strenge Regeln der Elektronenschub-Buchhaltung (`MechanismSpec 2.1`)
 Jeder Reaktionsmechanismus muss Schritt für Schritt als Sequenz wohldefinierter **Elementarschritte** formuliert werden (Regelbasis aus dem `codex-organic-chem`-Quellmodul `mechanism_semantics.py` / `mechanism-spec.md`):
 1. **Atom-Mapping-Erhaltung:** Jedes Atom erhält eine eindeutige, positive Map-Nummer (`[C:1]`, `[O:2]`), die über alle Stufen eines Elementarschritts exakt erhalten bleibt. Ein Atom darf zwischen Edukt- und Produktseite eines Schritts niemals umnummeriert werden oder verschwinden.
@@ -118,11 +156,13 @@ Jeder Reaktionsmechanismus muss Schritt für Schritt als Sequenz wohldefinierter
      - *Effekt:* Bindungsordnung $(a,b)$ sinkt um $2 \times 0{,}5 = 1$; Radikalpopulation steigt an beiden Atomen um $+1$ ($\Delta R(a) = +1, \Delta R(b) = +1$); Formalladungen bleiben unverändert ($\Delta Q = 0$). Ein einzelner Fischhaken ohne Partner hinterlässt eine gebrochene Bindungsordnung ($0{,}5$) und ist ungültig!
 6. **Strikte Zustandskontinuität zwischen Folgeschritten:** Bei mehrstufigen Mechanismen muss der `expected_state` von Schritt $k$ (inklusive aller Gegenionen, Nebenprodukte und noch nicht umgesetzter Reagenzien/Zuschauer-Spezies) **atom- und ladungsidentisch** mit dem `starting_state` von Schritt $k+1$ sein. Chemische Spezies dürfen zwischen zwei Schritten niemals stillschweigend verschwinden oder aus dem Nichts auftauchen. Resonanz-Grenzstrukturen dürfen nicht als sequenzielle Reaktionsschritte ausgegeben werden, sondern müssen klar als Mesomerie/Resonanz vom chemischen Reaktionsschritt getrennt werden.
 
+<a id="sec-9"></a>
 ### 2.3 Visuelle & Graphische Qualitätsregeln für Mechanismen und Schemata
 Aus der `MechanismSpec`-Grafikkonvention (Quellmodul `codex-organic-chem`/`mechanism-graphics.md`) gelten für die Darstellung von Reaktionsmechanismen und Syntheseschemata:
 - **Pfeil-Konventionen:** Gepaarte Elektronenbewegungen ($2\,e^-$) erhalten offene, abgerundete V-Pfeilspitzen mit symmetrischen Flügeln; Einzelelektronen-Bewegungen ($1\,e^-$) erhalten einseitige offene Fischhaken (`Fishhooks`). Gefüllte Dreiecksspitzen sind ausschließlich für Reaktionsfortschrittspfeile (`Reaction Progression Arrows`) zwischen Zuständen reserviert.
 - **Lokale Pfeilführung:** Elektronenpfeile müssen kurz und lokal geführt werden (Richtwert: $\le 3{,}5$ Bindungslängen). Sie starten exakt am freien Elektronenpaar oder der Bindung (bei $\text{HO}^-$ zwingend am Sauerstoff, niemals am Wasserstoff!) und enden exakt an der Atom- oder Bindungsgrenze, ohne Atomlabels, Ladungssymbole oder andere Bindungen zu durchschneiden.
 
+<a id="sec-10"></a>
 ### 2.4 Kanonische SMARTS-Muster zur Substruktur- und Funktionsgruppen-Erkennung
 Zur fehlerfreien Erkennung funktioneller Gruppen (direkt ausführbar via `scripts/chem_check.py smarts`, abgeglichen mit den Quellmodulen `codex-organic-chem`/`rdkit_tools.py` und `scientific-agent-skills/rdkit`) gelten folgende Referenz-SMARTS (mit Beachtung der Abgrenzung zwischen aliphatischem `C` und aromatischem `c`, sowie `[#6]` für beliebigen Kohlenstoff):
 
@@ -140,12 +180,12 @@ Zur fehlerfreien Erkennung funktioneller Gruppen (direkt ausführbar via `script
 | **Carbonsäureester** | `[CX3](=O)[OX2H0][#6]` | `CC(=O)OC` | `CC(=O)O` (Hinweis: trifft auch Anhydride) |
 | **Amid** | `[CX3](=O)[NX3]` bzw. `[NX3][CX3](=[OX1])` | `CC(=O)N` | `CCN` (Amin) |
 | **Neutrales Amin (nicht Amid/Sulfonamid)** | `[NX3;$(N-[#6]);!$(N-C=O);!$(N-S(=O)=O);!$(N-P=O);!$(N=*)]` | `CCN` | `CC(=O)N` |
-| **Primäres Amin** | `[NX3H2;!$(N-C=O);!$(N-S(=O)=O);!$(N-P=O)]` | `CN` | `CNC` |
+| **Primäres Amin** | `[NX3H2;$(N-[#6]);!$(N-C=O);!$(N-S(=O)=O);!$(N-P=O)]` | `CN` | `CNC`, `N` (Ammoniak) |
 | **Ether (ohne Ester-Sauerstoff)** | `[#6][OX2H0;!$(O-C=O)][#6]` | `COC` | `CC(=O)OC` |
 | **Alkylhalogenid** | `[CX4][F,Cl,Br,I]` | `CCCl` | `Clc1ccccc1` (Arylhalogenid) |
 | **Arylhalogenid** | `c[F,Cl,Br,I]` | `Clc1ccccc1` | `CCCl` |
 | **Alken / Alkin / Nitril** | `C=C` / `C#C` / `C#N` | `C=CC` / `C#CC` / `CC#N` | Aromaten / Imine |
-| **Boronsäure** | `B(O)O` | `OB(O)c1ccccc1` | Boronsäureester |
+| **Boronsäure** | `[BX3]([OX2H1])[OX2H1]` | `OB(O)c1ccccc1` | `COB(OC)c1ccccc1` (Boronsäureester) |
 | **Nitrogruppe** | `[$([NX3](=O)=O),$([NX3+](=O)[O-])]` | `C[N+](=O)[O-]` | `CN` |
 | **Thiol / Sulfid (Thioether)** | `[#6][SX2H1]` / `[#6][SX2H0][#6]` | `CCS` / `CSC` | `CS(=O)C` |
 | **Sulfoxid / Sulfon** | `[#6][SX3](=O)[#6]` / `[#6][SX4](=O)(=O)[#6]` | `CS(=O)C` / `CS(=O)(=O)C` | `CSC` |
@@ -153,10 +193,12 @@ Zur fehlerfreien Erkennung funktioneller Gruppen (direkt ausführbar via `script
 
 ---
 
+<a id="sec-11"></a>
 ## 3. PHYSIKALISCHE & CHEMISCHE PROZESSSICHERHEIT ZUERST
 
 Vor jedem praktischen Synthese-, Dosier-, Misch-, Aufarbeitungs- (`Workup`) oder Destillationsschritt **muss** die KI proaktiv alle realen physikalisch-chemischen Gefahren analysieren und explizite Warnhinweise sowie technische Schutzmaßnahmen ausgeben.
 
+<a id="sec-12"></a>
 ### 3.1 Exothermie, Adiabatischer Temperaturanstieg & Thermal Runaway
 1. **Skalierungs-Gesetz (`Scale changes physics`):** Das Oberflächen-zu-Volumen-Verhältnis ($A/V \propto r^{-1}$) verschlechtert sich beim Übergang vom $50\text{ mL}$-Rundkolben zum Liter- oder Technikumsmaßstab dramatisch. Was im Mikromaßstab durch Luft-/Eisbadkühlung unbemerkt bleibt, führt im Großansatz ohne kontrollierte Zudosierung zum thermischen Durchgehen (`Thermal Runaway`).
 2. **Kalorimetrische Kenngrößen (`RC1` / `ARC` / `DSC`):**
@@ -164,6 +206,7 @@ Vor jedem praktischen Synthese-, Dosier-, Misch-, Aufarbeitungs- (`Workup`) oder
    - **Praktische Gegenmaßnahme:** Niemals alle Reaktanden im Batch vorlegen und gemeinsam aufheizen („All-in-Batch-Verbot“ bei hohen Reaktionsenthalpien). Zwingend **Semi-Batch-Führung** (kontrolliertes Zutropfen über Tropftrichter oder Spritzenpumpe mit definierter Zutropfrate, Vorkühlung im Kühlbad, interne Temperaturüberwachung mittels Innenthermometer!).
    - **Grignard-Initiierungs-Gefahr:** Springt eine Grignard-Reaktion ($\text{Mg} + \text{R-X}$) nach Zugabe der ersten $5\text{--}10\,\%$ Halogenid nicht sofort an (erkennbar an Trübung, lokaler Erwärmung am Metall, leichtem Sieden), darf **unter keinen Umständen das restliche Alkyl-/Arylhalogenid weiter zugetropft werden**! Andernfalls setzt die Reaktion verzögert auf einen Schlag ein und führt zur schlagartigen Ejektion des Kolbeninhalts durch den Rückflusskühler. Erst mit kleinster Startmenge durch Anwärmen, Jodkristall, 1,2-Dibromethan oder DIBAL-H-Spur aktivieren.
 
+<a id="sec-13"></a>
 ### 3.2 Gasentwicklung & Überdruckgefahr (Explosionsschutz)
 1. **Verbot geschlossener Systeme:** Keine Reaktion, kein Reflux, kein Erwärmen und kein Quench darf jemals in einer hermetisch geschlossenen Glasapparatur ohne Druckausgleich durchgeführt werden (Ausnahme: dafür ausgelegte, geprüfte Druckautoklaven/Parr-Reaktoren mit Berstscheibe und Manometer).
 2. **Gasentwickelnde Reaktionen & Quenches:**
@@ -172,6 +215,7 @@ Vor jedem praktischen Synthese-, Dosier-, Misch-, Aufarbeitungs- (`Workup`) oder
    - **$\text{H}_2$-Freisetzung (Knallgas-/Zündgefahr):** Deprotonierungen mit $\text{NaH}, \text{KH}$, Alkalimetallen ($\text{Na}, \text{K}, \text{Li}$) sowie saure oder alkoholische Quenches von $\text{LiAlH}_4, \text{NaBH}_4, \text{DIBAL-H}, \text{BH}_3\cdot\text{THF}$ oder unumgesetztem $\text{Mg}/\text{Zn}$. Gleichzeitige Wärmeentwicklung + katalytische Metalloberflächen (z. B. $\text{Pd/C}$, Raney-Nickel, feinverteiltes $\text{LiAlH}_4$) entzünden den entstehenden Wasserstoff an Luft sofort!
    - **$\text{SO}_2 / \text{HCl} / \text{CO}$-Freisetzung:** Chlorierungen mit Thionylchlorid ($\text{SOCl}_2 \rightarrow \text{SO}_2\uparrow + \text{HCl}\uparrow$) oder Oxalylchlorid ($(\text{COCl})_2 + \text{DMF}_\text{kat.} \rightarrow \text{CO}\uparrow + \text{CO}_2\uparrow + \text{HCl}\uparrow$); Swern-Oxidation ($\text{CO}\uparrow + \text{Me}_2\text{S}\uparrow$). Abgase müssen im Abzug über einen Gaswäscher (`Scrubber`, z. B. verdünnte $\text{NaOH}$-Lösung mit Rückschlagfalle gegen Zurücksteigen!) geleitet werden.
 
+<a id="sec-14"></a>
 ### 3.3 Pyrophore, Wasserreaktive & Hochenergetische Reagenzien
 1. **Pyrophore Organometalle & Hydride:**
    - **$t\text{-BuLi}$ (tert-Butyllithium in Pentan/Heptan):** Extrem pyrophor — entzündet sich an Luft augenblicklich mit Stichflamme! Nur unter strikter Schlenk-/Argon-Technik per gasdichter Spritze oder Kanüle überführen; niemals an Luft abtropfen lassen. Vor Verwendung Titer bestimmen; Quench von Spritzenresten niemals direkt mit Wasser, sondern durch langsames Aufziehen von trockenem Heptan/THF und kontrolliertes Ablassen in eine gekühlte Lösung von trockenem Isopropanol in Heptan/THF unter Inertgas.
@@ -190,6 +234,7 @@ Vor jedem praktischen Synthese-, Dosier-, Misch-, Aufarbeitungs- (`Workup`) oder
      - **Diazoniumsalze:** Aryl-Diazoniumsalze (außer stabilisierten $\text{BF}_4^-$-Salzen im Kleinstmaßstab) niemals trocken isolieren! Immer in Lösung bei $0\text{--}5\,^\circ\text{C}$ herstellen und direkt weiterumsetzen.
    - **Ozonide & Peroxide ($m\text{CPBA}$, $\text{H}_2\text{O}_2 > 30\,\%$, $\text{tBuOOH}$):** Bei Ozonolysen gebildete Molozonide/Trioxolane niemals vor dem reduktiven/oxidativen Quench ($\text{Me}_2\text{S}, \text{PPh}_3, \text{Zn/AcOH}$ oder $\text{NaBH}_4$) einengen! Vor dem Entfernen des Lösungsmittels zwingend mit KI-Stärke-Papier auf vollständigen Abbau aller Peroxide prüfen.
 
+<a id="sec-15"></a>
 ### 3.4 Inkompatible Stoffkombinationen & Akut Toxische Gase
 Die KI muss jede Vorschrift auf gefährliche Inkompatibilitäten prüfen und vor der Entstehung tödlicher Gase warnen:
 - **Cyanide ($\text{NaCN}, \text{KCN}, \text{TMSCN}, \text{Zn(CN)}_2$) + Säure ($p\text{H} < 8$):** Sofortige Freisetzung von hochgiftigem **Blausäure-Gas ($\text{HCN}$, $\text{p}K_\text{S} = 9{,}2$, $\text{bp } 26\,^\circ\text{C}$)**. Cyanidhaltige Reaktionsmischungen dürfen niemals sauer aufgearbeitet werden! Wässrige Cyanid-Abfälle müssen strikt alkalisch ($p\text{H} > 11$, z. B. mit $\text{NaOH}$) gehalten und getrennt entsorgt (bzw. unter stark alkalischer Kühlung mit $\text{NaOCl}$ zu Cyanat oxidiert) werden.
@@ -208,18 +253,21 @@ Die KI muss jede Vorschrift auf gefährliche Inkompatibilitäten prüfen und vor
 
 ---
 
+<a id="sec-16"></a>
 ## 4. LABOR-LOGIK VOR PAPIER-CHEMIE (DER VOLLSTÄNDIGE PRAKTISCHE PFAD)
 
 Eine organische Synthese endet **niemals** bei der Reaktionsgleichung auf dem Papier. Jede Syntheseausarbeitung muss als geschlossene praktische Kette gedacht und beschrieben werden:
 
 $$\text{Apparatur \& Vorlage} \longrightarrow \text{Zudosierung \& Reaktionskontrolle (DC/LC-MS)} \longrightarrow \text{Quench} \longrightarrow \text{Phasentrennung \& Wäschen (Workup)} \longrightarrow \text{Trocknung \& Einengen} \longrightarrow \text{Reinigung (Abtrennung spezifischer Nebenprodukte)} \longrightarrow \text{Orthogonale Strukturbestätigung}$$
 
+<a id="sec-17"></a>
 ### 4.1 Pflicht-Parameter jeder Synthesevorschrift
 Jede vollständige experimentelle Vorschrift (oder Syntheseempfehlung) muss präzise angeben:
 1. **Stöchiometrie & Konzentration:** Limitierendes Edukt ($1{,}00\text{ Äq.}$, Stoffmenge in $\text{mmol}$, Masse in $\text{mg/g}$), molare Äquivalente (`Äq.`) aller Reagenzien, Katalysatoren (in $\text{mol-}\%$) und Additive sowie die **Molarität ($c$ in $\text{mol L}^{-1}$, typischerweise $0{,}05\text{--}0{,}5\text{ M}$)** im Lösungsmittel.
 2. **Atmosphäre, Apparatur & Zugabereihenfolge (`Order of Addition`):** Flammen-/ofentrockene Glasgeräte + Schutzgas ($\text{N}_2$/Argon) für feuchtigkeitsempfindliche Reaktionen vs. offene/wasserhaltige Führung; exakte Zugabereihenfolge (z. B. erst Substrat + Base zur Deprotonierung, dann Elektrophil; oder umgekehrt bei Barbier-/In-situ-Quench-Bedingungen) und Zugabegeschwindigkeit.
 3. **Temperaturfenster & Reaktionsverfolgung:** Exaktes Kühl-/Heizbad (z. B. $-78\,^\circ\text{C}$ Trockeneis/Aceton $\rightarrow$ langsam auf $\text{RT}$ erwärmen; oder Rückfluss / `Reflux` bei Siedetemperatur des Lösungsmittels) und Endpunktkontrolle per Dünnschichtchromatographie (`DC` mit Co-Spot gegen das limitierende Edukt!), GC oder LC-MS.
 
+<a id="sec-18"></a>
 ### 4.2 Das Gesetz der Nebenprodukt-Abtrennung (`Byproduct Purge Logic`)
 Viele auf dem Papier hochselektive Reaktionen scheitern im Labor, weil das stöchiometrische Reagenz-Nebenprodukt ähnliche Polarität oder Löslichkeit wie das Zielmolekül besitzt. Die KI **muss** bei folgenden Reaktionen immer sofort die praktische Abtrennungsstrategie für das Nebenprodukt mitliefern:
 1. **Triphenylphosphinoxid ($\text{O=PPh}_3$) aus Wittig-, Mitsunobu-, Appel- und Staudinger-Reaktionen:**
@@ -241,6 +289,7 @@ Viele auf dem Papier hochselektive Reaktionen scheitern im Labor, weil das stöc
    - **Kupfersalze (aus Sonogashira-, Ullmann- oder CuAAC-Click-Reaktionen):** Mit wässriger $\text{NH}_4\text{Cl}$/$\text{NH}_3$-Pufferlösung oder wässriger $\text{EDTA}$-Lösung waschen, bis die wässrige Phase nicht mehr tiefblau ($\text{[Cu(NH}_3)_4]^{2+}$) gefärbt ist.
    - **Palladium-/Schwermetallspuren (in API-/Pharmavorstufen):** Behandlung mit Aktivkohle (`Darco`), Thiol-funktionalisiertem Kieselgel (`SiliaMetS Thiol`) oder Waschen mit wässriger $N$-Acetylcystein-/Thioharnstoff-Lösung.
 
+<a id="sec-19"></a>
 ### 4.3 Ausschluss klassischer Fehlschlüsse (`Red Herrings` & `Common Pitfalls`)
 Die KI muss bei der Fehlerdiagnose (`Troubleshooting`) und Strukturaufklärung zwingend folgende Trugschlüsse vermeiden:
 1. **„Ein einzelner Fleck auf der DC bedeutet reines Produkt“:** Falsch! Nicht-UV-aktive und mit dem gewählten Tauchreagenz nicht anfärbbare Verunreinigungen (z. B. gesättigte Kohlenwasserstoffe, Silikonfett, anorganische Salze, Lösungsmittel) sind auf der DC unsichtbar; Regio- oder Diastereoisomere sowie Produkt + Edukt können bei ungeeignetem Laufmittel exakt denselben $R_f$-Wert besitzen.
@@ -251,6 +300,7 @@ Die KI muss bei der Fehlerdiagnose (`Troubleshooting`) und Strukturaufklärung z
 
 ---
 
+<a id="sec-20"></a>
 ## 5. CHECKLISTE DER VOLLSTÄNDIGEN ANTWORT (`DEFINITION OF DONE`)
 
 Bevor die KI eine Synthese-, Mechanismus- oder Laboranfrage abschließt, prüft sie intern folgende 8 Punkte:

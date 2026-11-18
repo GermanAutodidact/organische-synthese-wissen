@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cheminformatik-Prüfskript für organische-synthese-wissen (v2.2-DE).
+"""Cheminformatik-Prüfskript für organische-synthese-wissen (v2.3-DE).
 
 Implementiert die Prüfregeln aus SKILL.md (Abschnitt 1.2, 1.3 und 2.4):
 - lone-pairs: Exakte Berechnung freier Elektronenpaare (N_LP) ohne externe Pakete
@@ -53,14 +53,14 @@ CANONICAL_SMARTS: dict[str, str] = {
     "Carbonsaeureester": "[CX3](=O)[OX2H0][#6]",
     "Amid": "[CX3](=O)[NX3]",
     "Neutrales Amin": "[NX3;$(N-[#6]);!$(N-C=O);!$(N-S(=O)=O);!$(N-P=O);!$(N=*)]",
-    "Primaeres Amin": "[NX3H2;!$(N-C=O);!$(N-S(=O)=O);!$(N-P=O)]",
+    "Primaeres Amin": "[NX3H2;$(N-[#6]);!$(N-C=O);!$(N-S(=O)=O);!$(N-P=O)]",
     "Ether (ohne Ester)": "[#6][OX2H0;!$(O-C=O)][#6]",
     "Alkylhalogenid": "[CX4][F,Cl,Br,I]",
     "Arylhalogenid": "c[F,Cl,Br,I]",
     "Alken": "C=C",
     "Alkin": "C#C",
     "Nitril": "C#N",
-    "Boronsaeure": "B(O)O",
+    "Boronsaeure": "[BX3]([OX2H1])[OX2H1]",
     "Nitrogruppe": "[$([NX3](=O)=O),$([NX3+](=O)[O-])]",
     "Thiol": "[#6][SX2H1]",
     "Sulfid": "[#6][SX2H0][#6]",
@@ -83,6 +83,12 @@ def compute_lone_pairs(
             "valid": False,
             "error": f"Element '{element}' nicht in Hauptgruppen-Tabelle {sorted(VALENCE_ELECTRONS)}",
         }
+    if total_valence < 0 or radical_electrons < 0:
+        return {
+            "valid": False,
+            "element": element,
+            "error": f"Negative Valenz ({total_valence}) oder Radikalzahl ({radical_electrons}) unzulaessig.",
+        }
     n_val = VALENCE_ELECTRONS[element]
     numerator = n_val - formal_charge - total_valence - radical_electrons
     if numerator < 0 or numerator % 2 != 0:
@@ -93,14 +99,16 @@ def compute_lone_pairs(
             "error": f"Ungueltige Valenz/Elektronenzahl (Zaehler={numerator})",
         }
     n_lp = numerator // 2
-    # Period-1/2 Oktett-/Duplett-Grenze pruefen (kein 5-bindiges N/C/O/F!)
-    if element == "H" and (total_valence > 1 or n_lp > 1):
-        return {
-            "valid": False,
-            "element": element,
-            "n_lone_pairs": n_lp,
-            "error": "Wasserstoff ueberschreitet Duplett-Grenze (max. 2 Valenzelektronen).",
-        }
+    # Period-1/2 Oktett-/Duplett-Grenze pruefen (kein 4-e- H und kein 5-bindiges N/C/O/F!)
+    if element == "H":
+        own_electrons = 2 * total_valence + 2 * n_lp + radical_electrons
+        if total_valence > 1 or own_electrons > 2:
+            return {
+                "valid": False,
+                "element": element,
+                "n_lone_pairs": n_lp,
+                "error": f"Wasserstoff ueberschreitet Duplett-Grenze (V={total_valence}, Valenzelektronen={own_electrons} > 2).",
+            }
     if element in {"B", "C", "N", "O", "F"}:
         shared_electrons = 2 * total_valence
         own_electrons = shared_electrons + 2 * n_lp + radical_electrons
@@ -285,8 +293,15 @@ def run_self_test() -> int:
     assert compute_lone_pairs("N", 0, 3)["n_lone_pairs"] == 1
     assert compute_lone_pairs("N", 1, 4)["n_lone_pairs"] == 0
     assert compute_lone_pairs("O", -1, 1)["n_lone_pairs"] == 3
+    assert compute_lone_pairs("H", -1, 0)["valid"] is True  # Hydrid H- (2 e-)
+    assert compute_lone_pairs("H", -2, 1)["valid"] is False  # 4-Elektronen-H verboten (F2)
+    assert compute_lone_pairs("C", 0, -2)["valid"] is False  # Negative Valenz verboten (F2)
+    assert compute_lone_pairs("C", 0, 4, -2)["valid"] is False  # Negative Radikalzahl verboten (F2)
     assert compute_lone_pairs("C", 0, 5)["valid"] is False  # Pentavalentes C verboten
     assert compute_lone_pairs("N", 0, 5)["valid"] is False  # 5-bindiges neutrales N verboten
+    # 2. Kanonische SMARTS Regression (F1)
+    assert CANONICAL_SMARTS["Boronsaeure"] == "[BX3]([OX2H1])[OX2H1]"
+    assert "$(N-[#6])" in CANONICAL_SMARTS["Primaeres Amin"]
 
     Chem, _, _, _ = _load_rdkit()
     if Chem is not None:
@@ -295,6 +310,8 @@ def run_self_test() -> int:
         assert cmd_balance("CC(=O)C>>CC(O)C")["status"] == "unbalanced"
         assert cmd_balance("CC(=O)C.[H][H]>>CC(O)C")["status"] == "balanced"
         assert "Aldehyd" in cmd_smarts("CC=O")["matches"]
+        assert "Boronsaeure" in cmd_smarts("OB(O)c1ccccc1")["matches"]
+        assert "Boronsaeure" not in cmd_smarts("COB(OC)c1ccccc1")["matches"]
     print("OK: chem_check.py Selbsttest bestanden (RDKit=" + ("aktiv" if Chem else "nicht installiert") + ").")
     return 0
 

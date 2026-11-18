@@ -2,6 +2,8 @@
 
 Dieses Modul vereint die retrosynthetische Disconnection-Logik (nach Corey, Warren, Seebach sowie den retrosynthetischen Validierungsregeln aus `codex-organic-chem` und `scientific-agent-skills/torchdrug`) mit der vollständigen Auswertung der Royal Society of Chemistry Reaction Ontology (`rsc-ontology/rxno`, inkl. Molecular Processes `MOP`) und der hierarchischen SMARTS-Reaktionstaxonomie der Schwaller-Gruppe (`schwallergroup/ReactionClassifier`) sowie einem umfassenden Nachschlagewerk der zentralen organischen Namensreaktionen.
 
+> **Quellenhinweis:** Im Text genannte Quell-Dateinamen (z. B. `data/taxonomy.json`, `data/class_to_templates.json`) bezeichnen die konsolidierten Upstream-Archive (keine lokalen Dateien in diesem Repo); das vollständige Ontologie- und SMIRKS-Register liegt in `references/02b_Ontologie_RXNO_MOP_und_ReactionClassifier.md`.
+
 ---
 
 <!-- TOC_START -->
@@ -9,21 +11,21 @@ Dieses Modul vereint die retrosynthetische Disconnection-Logik (nach Corey, Warr
 
 | Abschnitt | Ebene | Zeilen |
 | :--- | :--- | :---: |
-| [1. Retrosynthetische Systematik: Disconnections, Synthons, Umpolung & Ringstrategien](#sec-1) | Hauptabschnitt | Z. 33–34 |
-| ↳ [1.1 Grundbegriffe & Das Corey-Warren-Disconnection-Protokoll](#sec-2) | Unterabschnitt | Z. 36–44 |
-| ↳ [1.2 Die Polaritäts-Alternanz-Regel, Donor/Akzeptor-Synthons ($d^n / a^n$) & Umpolung (Seebach-Nomenklatur)](#sec-3) | Unterabschnitt | Z. 46–74 |
-| ↳ [1.3 Systematische Disconnection-Matrix nach funktionellem Gruppen-Abstand (1,1- bis 1,6-Beziehungen)](#sec-4) | Unterabschnitt | Z. 76–93 |
-| ↳ [1.4 Ringschluss-Systematik: Baldwin-Regeln & Strategische Ringgröße-Methoden](#sec-5) | Unterabschnitt | Z. 95–133 |
-| ↳ [1.5 die 6 Goldenen Strategischen Regeln für Retrosynthetische Bindungsschnitte (Corey-LHASA & `codex-organic-chem`)](#sec-6) | Unterabschnitt | Z. 135–152 |
-| [2. Systematische Auswertung der `ReactionClassifier`-Taxonomie & `RXNO`/`MOP`-Ontologie](#sec-7) | Hauptabschnitt | Z. 154–155 |
-| ↳ [2.1 Die 10 Hauptklassen und 62 Level-2-Reaktionsklassen der Schwaller-`ReactionClassifier`-Taxonomie (inkl. kanonischer SMARTS-Templates)](#sec-8) | Unterabschnitt | Z. 157–166 |
-| [3. Systematischer Katalog der Organischen Namensreaktionen (Vollständige 5-Punkte-Referenz)](#sec-9) | Hauptabschnitt | Z. 168–178 |
-| ↳ [3.1 C-C-Bindungsknüpfung über Carbonyl-, Enolat- und Imin-Chemie](#sec-10) | Unterabschnitt | Z. 180–198 |
-| ↳ [3.2 Pericyclische Reaktionen, Cycloadditionen & Sigmatrope Umlagerungen](#sec-11) | Unterabschnitt | Z. 200–213 |
-| ↳ [3.3 Funktionelle Gruppen-Umwandlungen (`FGI`), Substitutionen & Umlagerungen an C, N und O](#sec-12) | Unterabschnitt | Z. 215–230 |
-| ↳ [3.4 Aromaten-Funktionalisierung & Heterocyclen-Synthesen (Indole, Pyridine, Pyrrole, Chinoline, Azole)](#sec-13) | Unterabschnitt | Z. 232–245 |
-| ↳ [3.5 Übergangsmetall-katalysierte Kreuzkupplungen, Carben-/Metathese- & C-C-Olefinierungs-Namensreaktionen](#sec-14) | Unterabschnitt | Z. 247–264 |
-| ↳ [3.6 Radikalische, C-H-Aktivierungs- & Multikomponenten-Namensreaktionen (`MCR`)](#sec-15) | Unterabschnitt | Z. 266–277 |
+| [1. Retrosynthetische Systematik: Disconnections, Synthons, Umpolung & Ringstrategien](#sec-1) | Hauptabschnitt | Z. 35–36 |
+| ↳ [1.1 Grundbegriffe & Das Corey-Warren-Disconnection-Protokoll](#sec-2) | Unterabschnitt | Z. 38–46 |
+| ↳ [1.2 Die Polaritäts-Alternanz-Regel, Donor/Akzeptor-Synthons ($d^n / a^n$) & Umpolung (Seebach-Nomenklatur)](#sec-3) | Unterabschnitt | Z. 48–76 |
+| ↳ [1.3 Systematische Disconnection-Matrix nach funktionellem Gruppen-Abstand (1,1- bis 1,6-Beziehungen)](#sec-4) | Unterabschnitt | Z. 78–95 |
+| ↳ [1.4 Ringschluss-Systematik: Baldwin-Regeln & Strategische Ringgröße-Methoden](#sec-5) | Unterabschnitt | Z. 97–135 |
+| ↳ [1.5 Die 6 Goldenen Strategischen Regeln für Retrosynthetische Bindungsschnitte (Corey-LHASA & `codex-organic-chem`)](#sec-6) | Unterabschnitt | Z. 137–154 |
+| [2. Systematische Auswertung der `ReactionClassifier`-Taxonomie & `RXNO`/`MOP`-Ontologie](#sec-7) | Hauptabschnitt | Z. 156–157 |
+| ↳ [2.1 Die 10 Hauptklassen und 62 Level-2-Reaktionsklassen der Schwaller-`ReactionClassifier`-Taxonomie (inkl. kanonischer SMARTS-Templates)](#sec-8) | Unterabschnitt | Z. 159–168 |
+| [3. Systematischer Katalog der Organischen Namensreaktionen (Vollständige 5-Punkte-Referenz)](#sec-9) | Hauptabschnitt | Z. 170–180 |
+| ↳ [3.1 C-C-Bindungsknüpfung über Carbonyl-, Enolat- und Imin-Chemie](#sec-10) | Unterabschnitt | Z. 182–200 |
+| ↳ [3.2 Pericyclische Reaktionen, Cycloadditionen & Sigmatrope Umlagerungen](#sec-11) | Unterabschnitt | Z. 202–215 |
+| ↳ [3.3 Funktionelle Gruppen-Umwandlungen (`FGI`), Substitutionen & Umlagerungen an C, N und O](#sec-12) | Unterabschnitt | Z. 217–232 |
+| ↳ [3.4 Aromaten-Funktionalisierung & Heterocyclen-Synthesen (Indole, Pyridine, Pyrrole, Chinoline, Azole)](#sec-13) | Unterabschnitt | Z. 234–247 |
+| ↳ [3.5 Übergangsmetall-katalysierte Kreuzkupplungen, Carben-/Metathese- & C-C-Olefinierungs-Namensreaktionen](#sec-14) | Unterabschnitt | Z. 249–266 |
+| ↳ [3.6 Radikalische, C-H-Aktivierungs- & Multikomponenten-Namensreaktionen (`MCR`)](#sec-15) | Unterabschnitt | Z. 268–279 |
 
 ---
 
@@ -132,7 +134,7 @@ Jeder nukleophile, radikalische oder kationische Ringschluss wird durch **3 Desk
 ---
 
 <a id="sec-6"></a>
-### 1.5 die 6 Goldenen Strategischen Regeln für Retrosynthetische Bindungsschnitte (Corey-LHASA & `codex-organic-chem`)
+### 1.5 Die 6 Goldenen Strategischen Regeln für Retrosynthetische Bindungsschnitte (Corey-LHASA & `codex-organic-chem`)
 
 1. **Maximaler Vereinfachungs-Schnitt (`Convergent Synthesis > Linear Synthesis`):**
    - Schneide das Zielmolekül nach Möglichkeit **in der Mitte** in zwei etwa gleich große, ähnlich komplexe Fragmente (**Konvergente Synthese**).

@@ -2,6 +2,18 @@
 
 Alle wesentlichen Änderungen an `organische-synthese-und-laborpraxis` (`organische-synthese-wissen`) werden hier dokumentiert.
 
+## [2.3-DE] – 2026-11-18
+
+### Fachliche Korrekturen & Skript-Fixes (P1)
+- **Kanonische SMARTS (`SKILL.md` 2.4 & `scripts/chem_check.py`):** Boronsäure-SMARTS von `B(O)O` (traf fälschlich Boronsäureester) auf `[BX3]([OX2H1])[OX2H1]` korrigiert; `Primäres Amin` um `$(N-[#6])` zur Abgrenzung von Ammoniak/Hydrazin geschärft.
+- **Valenz-/Duplett-Check (`scripts/chem_check.py`):** `compute_lone_pairs()` weist jetzt 4-Elektronen-Wasserstoff (`H`, `Q=-2`, `V=1`) sowie negative Valenz-/Radikalwerte zuverlässig ab (inkl. neuer `--self-test`-Regressionen).
+
+### Handbuch, Navigation & Validator (P2–P4)
+- **Handbuch-Generator (`scripts/build_handbook.py`):** Entfernt YAML-Frontmatter aus eingebetteten Modulen (kein rohes YAML mehr in Modul 0) und erzeugt klickbare `#mod-*`-Anker + exakte Zeilenbereiche im `Gesamt-Inhaltsverzeichnis`.
+- **Quellenhinweise & Typo:** Einheitliche Upstream-Quellenhinweise am Anfang von Modul `01`, `02` und `02b` ergänzt; Überschriften-Typo in `02` (`1.5 Die 6 Goldenen…`) behoben.
+- **Cross-Platform & Navigation (`SKILL.md`):** Negativ-Trigger (`Don't use for…`) im Frontmatter und Inhaltsverzeichnis mit Zeilen-Index ergänzt.
+- **Validator-Härtung (`scripts/validate_kb.py`):** Dynamische Versionserkennung, exakte TOC-Zeilenindex-Prüfung, Prüfung relativer Markdown-Links/`#Anker`, ungeschlossener Codeblöcke, Trailing Whitespace, Handbuch-Frontmatter-Schutz und `evals/cases.json`-Modulvalidierung.
+
 ## [2.2-DE] – 2026-11-18
 
 ### Fachliche Korrekturen (P1)

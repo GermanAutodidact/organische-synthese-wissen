@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validiert Struktur, Inhalte, Anker, Regressionsschutz und Sync des organische-synthese-wissen Repos."""
+"""Validiert Struktur, Inhalte, Anker/Zeilenindizes, Links, Regressionsschutz und Sync des Repos."""
 
 from __future__ import annotations
 
@@ -8,12 +8,13 @@ import pathlib
 import re
 import subprocess
 import sys
+import urllib.parse
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 
 def parse_frontmatter(skill_md: pathlib.Path) -> tuple[dict[str, object], str]:
-    text = skill_md.read_text(encoding="utf-8")
+    text = skill_md.read_text(encoding="utf-8").replace("\r\n", "\n")
     if not text.startswith("---\n"):
         raise ValueError("SKILL.md muss mit YAML-Frontmatter ('---') beginnen.")
     end_idx = text.find("\n---\n", 4)
@@ -46,7 +47,34 @@ def parse_frontmatter(skill_md: pathlib.Path) -> tuple[dict[str, object], str]:
     return data, body
 
 
-def check_toc_and_anchors(path: pathlib.Path) -> list[str]:
+def strip_fenced_code_blocks(text: str) -> tuple[str, bool]:
+    out: list[str] = []
+    in_fence = False
+    fence_char = ""
+    fence_len = 0
+    for line in text.splitlines():
+        m = re.match(r"^\s*(`{3,}|~{3,})", line)
+        if m:
+            marker = m.group(1)
+            rest = line[m.end() :]
+            if not in_fence:
+                if marker[0] == "`" and "`" in rest:
+                    out.append(line)
+                    continue
+                in_fence = True
+                fence_char = marker[0]
+                fence_len = len(marker)
+                out.append("")
+                continue
+            if marker[0] == fence_char and len(marker) >= fence_len and line.strip() == marker:
+                in_fence = False
+                out.append("")
+                continue
+        out.append("" if in_fence else line)
+    return "\n".join(out), in_fence
+
+
+def check_toc_and_anchors(path: pathlib.Path, anchor_prefix: str = "sec-") -> list[str]:
     errors: list[str] = []
     text = path.read_text(encoding="utf-8")
     if "<!-- TOC_START -->" not in text or "<!-- TOC_END -->" not in text:
@@ -64,6 +92,22 @@ def check_toc_and_anchors(path: pathlib.Path) -> list[str]:
     for link in links:
         if link not in anchor_set:
             errors.append(f"{path.name}: Defekter TOC-Anker '#{link}'.")
+
+    # Exakte Zeilennummern-Pruefung fuer Z. START–END im TOC
+    lines = text.splitlines()
+    for m in re.finditer(
+        rf"\(#({re.escape(anchor_prefix)}[^)]+)\)\s*\|[^|]+\|\s*Z\.\s*(\d+)–(\d+)",
+        toc_block,
+    ):
+        aid, s_s, e_s = m.groups()
+        s_ln, e_ln = int(s_s), int(e_s)
+        if e_ln < s_ln or s_ln < 2 or s_ln > len(lines):
+            errors.append(f"{path.name}: Ungueltiger TOC-Zeilenbereich Z. {s_ln}–{e_ln} fuer '#{aid}'.")
+            continue
+        if lines[s_ln - 2].strip() != f'<a id="{aid}"></a>':
+            errors.append(
+                f"{path.name}: TOC-Zeilenindex fuer '#{aid}' veraltet (Z. {s_ln}, erwartet Anker in Z. {s_ln - 1})."
+            )
     return errors
 
 
@@ -71,10 +115,16 @@ def check_regressions(files: list[pathlib.Path]) -> list[str]:
     errors: list[str] = []
     for f in files:
         text = f.read_text(encoding="utf-8")
-        for i, line in enumerate(text.splitlines(), 1):
-            if re.search(r":\*\*[A-Za-zÄÖÜäöü]", line):
+        stripped, unclosed = strip_fenced_code_blocks(text)
+        if unclosed:
+            errors.append(f"{f.name}: Ungeschlossener Fenced Code Block.")
+        for i, line in enumerate(stripped.splitlines(), 1):
+            if line != line.rstrip(" \t"):
+                errors.append(f"{f.name}:{i}: Trailing Whitespace gefunden.")
+            clean = re.sub(r"`[^`]*`", lambda m: " " * len(m.group(0)), line)
+            if re.search(r":\*\*[A-Za-zÄÖÜäöü]", clean):
                 errors.append(f"{f.name}:{i}: Fehlendes Leerzeichen nach ':**'.")
-            if re.search(r"\),[A-Za-zÄÖÜäöü]", line):
+            if re.search(r"\),[A-Za-zÄÖÜäöü]", clean):
                 errors.append(f"{f.name}:{i}: Fehlendes Leerzeichen nach '),'.")
             if re.search(r"Ethylacetat[^|\n]*\+\s*Trockeneis", line):
                 errors.append(f"{f.name}:{i}: Physikalischer Fehler (EtOAc + Trockeneis).")
@@ -82,6 +132,40 @@ def check_regressions(files: list[pathlib.Path]) -> list[str]:
                 errors.append(f"{f.name}:{i}: Physikalischer Fehler (n-Hexan + Trockeneis).")
             if re.search(r"Methanol[^|\n]*\+[^\n]*Trockeneis[^\n]*-98", line):
                 errors.append(f"{f.name}:{i}: Physikalischer Fehler (MeOH + Trockeneis -98 °C).")
+            if "| **Boronsäure** | `B(O)O`" in line:
+                errors.append(f"{f.name}:{i}: Fehlerhafter Boronsaeure-SMARTS 'B(O)O' (trifft Ester).")
+    return errors
+
+
+def check_relative_links(files: list[pathlib.Path]) -> list[str]:
+    errors: list[str] = []
+    anchors_by_file: dict[pathlib.Path, set[str]] = {}
+    for f in files:
+        stripped, _ = strip_fenced_code_blocks(f.read_text(encoding="utf-8"))
+        anchors_by_file[f.resolve()] = set(re.findall(r'<a\s+id="([^"]+)"></a>', stripped))
+
+    for f in files:
+        stripped, _ = strip_fenced_code_blocks(f.read_text(encoding="utf-8"))
+        for i, line in enumerate(stripped.splitlines(), 1):
+            clean = re.sub(r"`[^`]*`", lambda m: " " * len(m.group(0)), line)
+            for lm in re.finditer(r"!?\[[^\]]*\]\(([^)\s]+)\)", clean):
+                href = lm.group(1)
+                if href.startswith(("http://", "https://", "mailto:", "file://")) or "<" in href:
+                    continue
+                if href.startswith("#"):
+                    aid = urllib.parse.unquote(href[1:])
+                    if aid.startswith(("sec-", "mod-")) and aid not in anchors_by_file[f.resolve()]:
+                        errors.append(f"{f.name}:{i}: Defekter Anker '{href}'.")
+                else:
+                    raw_p, _, raw_a = href.partition("#")
+                    path_part = urllib.parse.unquote(raw_p.split("?", 1)[0])
+                    resolved = (f.parent / path_part).resolve()
+                    if not resolved.exists():
+                        errors.append(f"{f.name}:{i}: Defekter relativer Link '{href}' (Ziel fehlt).")
+                    elif raw_a and resolved in anchors_by_file:
+                        aid = urllib.parse.unquote(raw_a)
+                        if aid.startswith(("sec-", "mod-")) and aid not in anchors_by_file[resolved]:
+                            errors.append(f"{f.name}:{i}: Defekter Ziel-Anker '{href}'.")
     return errors
 
 
@@ -103,6 +187,11 @@ def main() -> int:
         errors.append(f"Frontmatter 'description' zu lang ({len(desc)} > 1024 Zeichen).")
     if "Use whenever" not in desc and "use when" not in desc.lower():
         errors.append("Frontmatter 'description' sollte auch englische Trigger-Hinweise enthalten.")
+    if "don't use" not in desc.lower():
+        errors.append("Frontmatter 'description' sollte einen Negativ-Trigger ('Don't use for...') enthalten.")
+
+    meta = fm.get("metadata", {})
+    version = str(meta.get("version", "?")) if isinstance(meta, dict) else "?"
 
     if len(body.strip()) < 1000:
         errors.append("SKILL.md Body ist unerwartet kurz.")
@@ -150,8 +239,9 @@ def main() -> int:
     if checked == 0 or unchecked > 0:
         errors.append(f"Kontrollliste unvollstaendig ([x]={checked}, [ ]={unchecked}).")
 
-    # TOC-Anker
+    # TOC-Anker & Zeilenindizes
     toc_modules = [
+        skill_md,
         ROOT / "references/00_INDEX_UND_KONTROLLLISTE.md",
         ROOT / "references/01_Reaktionsmechanismen_Reagenzien_und_Selektivitaet.md",
         ROOT / "references/02_Retrosynthese_und_Namensreaktionen_Katalog.md",
@@ -160,11 +250,19 @@ def main() -> int:
     ]
     for m in toc_modules:
         if m.is_file():
-            errors.extend(check_toc_and_anchors(m))
+            errors.extend(check_toc_and_anchors(m, anchor_prefix="sec-"))
 
-    # Regressions-Lint
-    lint_files = [skill_md] + toc_modules + [ROOT / "references/KOMPLETTES_HANDBUCH_ORGANISCHE_SYNTHESE.md"]
-    errors.extend(check_regressions([p for p in lint_files if p.is_file()]))
+    handbook = ROOT / "references/KOMPLETTES_HANDBUCH_ORGANISCHE_SYNTHESE.md"
+    if handbook.is_file():
+        errors.extend(check_toc_and_anchors(handbook, anchor_prefix="mod-"))
+        hb_text = handbook.read_text(encoding="utf-8")
+        if re.search(r"^name:\s*organische-synthese-und-laborpraxis\s*$", hb_text, re.M):
+            errors.append("KOMPLETTES_HANDBUCH enthaelt eingebettetes YAML-Frontmatter aus SKILL.md.")
+
+    # Regressions-Lint & relative Links ueber alle Markdown-Dateien
+    all_md = sorted(p for p in ROOT.rglob("*.md") if ".git" not in p.parts)
+    errors.extend(check_regressions(all_md))
+    errors.extend(check_relative_links(all_md))
 
     # Webchat Prompt Limit
     wc = ROOT / "prompts/WEBCHAT_SYSTEM_PROMPT.md"
@@ -175,13 +273,30 @@ def main() -> int:
             if len(prompt_body) > 5000:
                 errors.append(f"Webchat-Prompt-Body zu lang ({len(prompt_body)} > 5000 Zeichen).")
 
-    # Evals JSON
+    # Evals JSON inkl. Schema- & Modul-Check
     ev = ROOT / "evals/cases.json"
     if ev.is_file():
+        all_files = {p.relative_to(ROOT).as_posix() for p in ROOT.rglob("*") if p.is_file() and ".git" not in p.parts}
+        all_basenames = {pathlib.Path(f).name for f in all_files}
         try:
             data = json.loads(ev.read_text(encoding="utf-8"))
-            if len(data.get("cases", [])) < 10:
+            cases = data.get("cases", [])
+            if len(cases) < 10:
                 errors.append("evals/cases.json sollte mindestens 10 Testfaelle enthalten.")
+            for c in cases:
+                cid = c.get("id", "?")
+                if not c.get("prompt"):
+                    errors.append(f"evals/cases.json ({cid}): Pflichtfeld 'prompt' fehlt.")
+                for mod in c.get("expected_modules", []):
+                    mod_s = str(mod)
+                    if "/" in mod_s:
+                        ok = mod_s in all_files
+                    elif "." in mod_s:
+                        ok = mod_s in all_files or mod_s in all_basenames
+                    else:
+                        ok = any(b.startswith((mod_s + "_", mod_s + "-", mod_s + ".")) for b in all_basenames)
+                    if not ok:
+                        errors.append(f"evals/cases.json ({cid}): expected_module '{mod_s}' nicht gefunden.")
         except Exception as exc:
             errors.append(f"evals/cases.json ungueltiges JSON: {exc}")
 
@@ -200,8 +315,8 @@ def main() -> int:
         return 1
 
     print(
-        f"OK: SKILL.md (v2.2-DE) + 6 Referenzdateien + Handbuch-Sync + TOC-Anker + "
-        f"Regressionsschutz + chem_check.py validiert (Checkliste: {checked}/{checked} abgeschlossen, 0 offen)."
+        f"OK: SKILL.md (v{version}) + 6 Referenzdateien + Handbuch-Sync + TOC-Zeilenindizes + "
+        f"Links + Regressionsschutz + Evals + chem_check.py validiert (Checkliste: {checked}/{checked} abgeschlossen, 0 offen)."
     )
     return 0
 

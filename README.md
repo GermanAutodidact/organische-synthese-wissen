@@ -1,4 +1,4 @@
-# Organische Synthese & Laborpraxis — Wissensdatenbank & KI-Skill (`v2.2-DE`)
+# Organische Synthese & Laborpraxis — Wissensdatenbank & KI-Skill (`v2.3-DE`)
 
 Dieses private Repository enthält die konsolidierte, verifizierte Wissensdatenbank und das KI-Regelwerk (**Skill: `organische-synthese-und-laborpraxis`**) für **Organische Synthese, Reaktionsmechanismen, Retrosynthese, Stöchiometrie, Reagenzien-Selektivität, Prozesssicherheit und praktische Labor-Aufarbeitung**.
 
